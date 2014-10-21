@@ -1,6 +1,8 @@
 package rationnel;
 
-import types.Rationnel;
+import java.util.Scanner;
+
+
 
 public class RationnelSimple implements Rationnel {
 	/**
@@ -57,7 +59,7 @@ public class RationnelSimple implements Rationnel {
 	}
 
 	//===================================================================
-	// COMPARISONS
+	// COMPARAISONS
 	//===================================================================
 	public boolean equals(Rationnel r2) {
 		return this.getDenominateur() == r2.getDenominateur() &&
@@ -74,6 +76,40 @@ public class RationnelSimple implements Rationnel {
 	//===================================================================
 	// AUTRES
 	//===================================================================
+	/**
+	 * Fonction makeRationnel
+	 */
+	
+		static Rationnel makeRationnel(int num, int den){
+			
+			RationnelSimple r1 = new RationnelSimple(num, den);
+			
+			return r1;
+		}
+
+	
+	/**
+	 * Saisie numérateur et dénominateur
+	 */
+	
+	static Rationnel lireRationnel(Scanner input){
+		
+		int num;
+		int den;
+		
+		System.out.println("Entrez le numérateur : \n");
+		num = input.nextInt();
+		System.out.println("Entrez le dénominateur : \n");
+		den = input.nextInt();
+		
+		RationnelSimple resultat = new RationnelSimple(num, den);
+		
+		return resultat;
+		
+	}
+	
+	
+	
 	/**
 	* Renvoie la valeur réelle de ce rationnel
 	*/
@@ -126,5 +162,5 @@ public class RationnelSimple implements Rationnel {
 	public String toString() {
 		return this.getNumerateur() + "/" + this.getDenominateur();
 	}
-
+	
 }
