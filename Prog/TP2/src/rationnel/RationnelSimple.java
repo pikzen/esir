@@ -33,9 +33,10 @@ public class RationnelSimple implements Rationnel {
 	* @param num Numérateur du rationnel
 	* @param den Dénominateur du rationnel
 	*/
+	
 	public RationnelSimple(int num, int den) {
-		this.Numerator 	= num;
-		this.Denominator 	= den;
+		Numerator 	= num;
+		Denominator = den;
 	}
 
 	/**
@@ -44,18 +45,18 @@ public class RationnelSimple implements Rationnel {
 	*/
 	public RationnelSimple(Rationnel copy) {
 		this.Numerator	= copy.getNumerateur();
-		this.Denominator	= copy.getDenominateur();
+		this.Denominator = copy.getDenominateur();
 	}
 
 	//===================================================================
 	// GETTERS// SETTERS
 	//===================================================================
 	public int getNumerateur() {
-		return Numerator;
+		return this.Numerator;
 	}
 
 	public int getDenominateur() {
-		return Denominator;
+		return this.Denominator;
 	}
 
 	//===================================================================
@@ -108,6 +109,41 @@ public class RationnelSimple implements Rationnel {
 		
 	}
 	
+	
+	/**
+	 * Méthode de tri
+	 */
+	
+	public static void InsertionTri(Rationnel[] tabTraitement, int taille) { /* La fonction  de tri par insertion */
+
+		int cpt;
+		Rationnel elementCourant;
+
+		for (int i = 1; i < taille; i++) {
+			elementCourant = tabTraitement[i]; /* Contient l'élément courant */
+			cpt = i - 1; /* Le compteur */
+
+			while (cpt >= 0 && tabTraitement[cpt].valeur() > elementCourant.valeur()) /* Tant que élément du dessous supérieur on le déplace */
+				
+			{
+				tabTraitement[cpt + 1] = tabTraitement[cpt]; /* on le déplace à la place d'après */
+				cpt--; /* le compteur décrémente */
+			}
+			tabTraitement[cpt + 1] = elementCourant; /* On met l'élément courant dans compteur +1 quand boucle finie */
+		}
+	}
+	
+	
+	/**
+	 * Méthode pour insérer un rationnel !!
+	 */
+	
+	
+	static void insererRationnel(Rationnel nouveau, Rationnel [] lesRationnels, int nb){
+		InsertionTri(lesRationnels, lesRationnels.length-1);
+		lesRationnels[lesRationnels.length] = nouveau;
+		InsertionTri(lesRationnels, lesRationnels.length-1);
+	}
 	
 	
 	/**
