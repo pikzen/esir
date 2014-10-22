@@ -139,8 +139,8 @@ public class TestUnitaireRationnelSimple {
 	@Test
 	// inversion d'une fraction non nulle
 	public void testInverse() {
-
 		System.out.print("\nTester inverse : ");
+		
 		Rationnel r1 = new RationnelSimple(-21, -4);
 		Rationnel inverse = r1.inverse();
 		Assert.assertTrue(inverse.getNumerateur() == r1.getDenominateur() &&

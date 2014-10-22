@@ -34,8 +34,15 @@ public class RationnelSimple implements Rationnel {
 	*/
 
 	public RationnelSimple(int num, int den) {
-		assert den != 0 : den;
+		assert den != 0;
 		
+		// Changement de signe si les deux parties sont de signe négatif
+		if (num < 0 && den < 0) {
+			num = -num;
+			den = -den;
+		}
+			
+		// Si on peut simplifier la fraction vers un résultat entier
 		if (num % den == 0 && den != 1) {
 			num = num / den;
 			den = 1;
@@ -142,7 +149,7 @@ public class RationnelSimple implements Rationnel {
 	* Renvoie l'inverse du ce rationnel
 	*/
 	public Rationnel inverse() {
-		assert this.getNumerateur() == 0 : this.getNumerateur();
+		assert this.getNumerateur() != 0;
 		return new RationnelSimple(this.getDenominateur(), this.getNumerateur());
 	}
 
