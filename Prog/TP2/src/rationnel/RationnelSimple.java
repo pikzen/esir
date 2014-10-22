@@ -1,6 +1,7 @@
 package rationnel;
 
 import java.util.Scanner;
+import types.*;
 
 
 
@@ -33,7 +34,7 @@ public class RationnelSimple implements Rationnel {
 	* @param num Numérateur du rationnel
 	* @param den Dénominateur du rationnel
 	*/
-	
+
 	public RationnelSimple(int num, int den) {
 		Numerator 	= num;
 		Denominator = den;
@@ -198,5 +199,5 @@ public class RationnelSimple implements Rationnel {
 	public String toString() {
 		return this.getNumerateur() + "/" + this.getDenominateur();
 	}
-	
+
 }

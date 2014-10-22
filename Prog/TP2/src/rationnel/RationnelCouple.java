@@ -2,6 +2,7 @@ package rationnel;
 
 import types.Rationnel;
 
+
 public class RationnelCouple implements Rationnel {
 	private Couple<Integer, Integer> Valeurs;
 
