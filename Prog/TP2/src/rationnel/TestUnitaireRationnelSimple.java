@@ -2,7 +2,6 @@ package rationnel;
 
 import java.util.Arrays;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Test;
 import types.Rationnel;
 import org.junit.runner.JUnitCore;
@@ -22,14 +21,14 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r1 = new RationnelSimple(3);
 		Assert.assertTrue(r1.getNumerateur() == 3);
 		Assert.assertTrue(r1.getDenominateur() == 1);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
-	// test constructeur Ã  2 paramÃ¨tres : cas d'un dÃ©nominateur nul
+	// test constructeur Ã  2 paramÃ¨tres : cas d'un dénominateur nul
 	@Test(expected = AssertionError.class)
 	public void test_Constructeur2_EchecAssertion() {
 
-		System.out.print("\nconstructeur Ã  2 paramÃ¨tres : assertion dÃ©nominateur non nul");
+		System.out.print("\nconstructeur Ã  2 paramÃ¨tres : assertion dénominateur non nul");
 		new RationnelSimple(3, 0);
 	}
 
@@ -37,8 +36,8 @@ public class TestUnitaireRationnelSimple {
 	// test constructeur Ã  2 paramÃ¨tres : divers cas
 	public void test_Constructeur2() {
 
-		System.out.print("\nconstructeur Ã  2 paramÃ¨tres : vÃ©rifier simplifications : ");
-		// simplification non nÃ©cessaire
+		System.out.print("\nconstructeur Ã  2 paramÃ¨tres : vérifier simplifications : ");
+		// simplification non nécessaire
 		Rationnel r1 = new RationnelSimple(3, 1);
 		Assert.assertTrue(r1.getNumerateur() == 3);
 		Assert.assertTrue(r1.getDenominateur() == 1);
@@ -50,52 +49,52 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r3 = new RationnelSimple(-21, -7);
 		Assert.assertTrue(r3.getNumerateur() == 3);
 		Assert.assertTrue(r3.getDenominateur() == 1);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	// test constructeur de copie
 	public void test_Constructeur3() {
 
-		System.out.print("\nconstructeur de copie : vÃ©rifier Ã©galitÃ© original/copie : ");
+		System.out.print("\nconstructeur de copie : vérifier égalité original/copie : ");
 		Rationnel r1 = new RationnelSimple(-21, -7);
 		Rationnel r2 = new RationnelSimple(r1);
 		Assert.assertTrue(r1.getNumerateur() == r2.getNumerateur() &&
 					r1.getDenominateur() == r2.getDenominateur());
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	public void testGetNumerateur() {
 
-		System.out.print("\nvÃ©rifier getNumerateur : ");
+		System.out.print("\nvérifier getNumerateur : ");
 		Rationnel r1 = new RationnelSimple(-21, -4);
 		Assert.assertTrue(r1.getNumerateur() == 21);
 		Rationnel r2 = new RationnelSimple(-21, -7);
 		Assert.assertTrue(r2.getNumerateur() == 3);
 		Rationnel r3 = new RationnelSimple(-5);
 		Assert.assertTrue(r3.getNumerateur() == -5);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	public void testGetDenominateur() {
 
-		System.out.print("\nvÃ©rifier getDenominateur : ");
+		System.out.print("\nvérifier getDenominateur : ");
 		Rationnel r1 = new RationnelSimple(-21, -4);
 		Assert.assertTrue(r1.getDenominateur() == 4);
 		Rationnel r2 = new RationnelSimple(-21, -7);
 		Assert.assertTrue(r2.getDenominateur() == 1);
 		Rationnel r3 = new RationnelSimple(-5);
 		Assert.assertTrue(r3.getDenominateur() == 1);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
-	// test de la mÃ©thode equals
+	// test de la méthode equals
 	public void testEqualsRationnel() {
 
-		System.out.print("\nTester Ã©galitÃ© : ");
+		System.out.print("\nTester égalité : ");
 		Rationnel r1 = new RationnelSimple(-21, -7);
 		Rationnel r2 = new RationnelSimple(r1);
 
@@ -109,7 +108,7 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r4 = new RationnelSimple(4);
 		Assert.assertTrue(! r1.equals(r4));
 		Assert.assertTrue(! r4.equals(r3));
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -125,7 +124,7 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r2 = new RationnelSimple(-3);
 		somme = r2.somme(r1);
 		Assert.assertTrue(somme.getNumerateur() == 0 && somme.getDenominateur() == 1);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test(expected = AssertionError.class)
@@ -146,7 +145,7 @@ public class TestUnitaireRationnelSimple {
 		Rationnel inverse = r1.inverse();
 		Assert.assertTrue(inverse.getNumerateur() == r1.getDenominateur() &&
 					inverse.getDenominateur() == r1.getNumerateur());
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -157,7 +156,7 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r1 = new RationnelSimple(-21, -4);
 		double val_r1 = r1.valeur();
 		Assert.assertTrue(val_r1 == 5.25);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -169,7 +168,7 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r2 = new RationnelSimple(-21, -7);
 		Assert.assertTrue(r1.compareTo(r2) > 0);
 		Assert.assertTrue(r2.compareTo(r1) < 0);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -183,13 +182,13 @@ public class TestUnitaireRationnelSimple {
 		Rationnel r1 = new RationnelSimple(1, 2);
 		TRationnel.insererRationnel(r1, lesRationnels, 0);
 		tester_egalite(lesRationnels, resu, 1);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	public void inserer_tete_tableau_1elt() {
 
-		System.out.print("\ninsertion en tÃªte d'un tableau d'un Ã©lÃ©ment : ");
+		System.out.print("\ninsertion en tête d'un tableau d'un élément : ");
 		Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3), new RationnelSimple(1, 2)};
 
 		Rationnel [] lesRationnels = new Rationnel[2];
@@ -197,13 +196,13 @@ public class TestUnitaireRationnelSimple {
 		TRationnel.insererRationnel(new RationnelSimple(1, 3), lesRationnels, 1);
 		tester_egalite(lesRationnels, resu, 2);
 
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	public void inserer_fin_tableau_1elt() {
 
-		System.out.print("\ninsertion en fin  d'un tableau d'un Ã©lÃ©ment : ");
+		System.out.print("\ninsertion en fin  d'un tableau d'un élément : ");
 		Rationnel [] resu = new Rationnel[]{new RationnelSimple(1, 3), new RationnelSimple(1, 2)};
 
 		Rationnel [] lesRationnels = new Rationnel[2];
@@ -211,13 +210,13 @@ public class TestUnitaireRationnelSimple {
 		TRationnel.insererRationnel(new RationnelSimple(1, 2), lesRationnels, 1);
 		tester_egalite(lesRationnels, resu, 2);
 
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
 	public void inserer_tete() {
 
-		System.out.print("\ninsertion en tÃªte                           : ");
+		System.out.print("\ninsertion en tête                           : ");
 		int [] numerateurs   = {
 			15,14,13,12,11,10,9,8,7,6,
 		};
@@ -229,14 +228,14 @@ public class TestUnitaireRationnelSimple {
 			resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
 		}
 
-		// insÃ©rer
+		// insérer
 		Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
 		for (int i = 0; i < numerateurs.length; ++i) {
 			TRationnel.insererRationnel(new RationnelSimple(numerateurs[i], denominateurs[i]),
 							 lesRationnels, i);
 		}
 		tester_egalite(lesRationnels, resu, numerateurs.length);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -254,14 +253,14 @@ public class TestUnitaireRationnelSimple {
 			resu[resu.length - i - 1] = new RationnelSimple(numerateurs[i], denominateurs[i]);
 		}
 
-		// insÃ©rer
+		// insérer
 		Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
 		for (int i = numerateurs.length - 1; i >= 0; --i) {
 			TRationnel.insererRationnel(new RationnelSimple(numerateurs[i], denominateurs[i]),
 							 lesRationnels, lesRationnels.length - i - 1);
 		}
 		tester_egalite(lesRationnels, resu, numerateurs.length);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
 	@Test
@@ -281,17 +280,17 @@ public class TestUnitaireRationnelSimple {
 			resu[i] = new RationnelSimple(numerateurs_tris[i], denominateurs[i]);
 		}
 
-		// insÃ©rer
+		// insérer
 		Rationnel [] lesRationnels = new Rationnel[numerateurs.length];
 		for (int i = 0 ; i < numerateurs.length;  ++i) {
 			TRationnel.insererRationnel(new RationnelSimple(numerateurs[i], denominateurs[i]),
 							 lesRationnels, i);
 		}
 		tester_egalite(lesRationnels, resu, numerateurs.length);
-		System.out.println("test rÃ©ussi");
+		System.out.println("test réussi");
 	}
 
-	// vÃ©rifier l'Ã©galitÃ© des nb premiers Ã©lÃ©ments de deux tableaux
+	// vérifier l'égalité des nb premiers éléments de deux tableaux
 	void tester_egalite(Rationnel [] t1, Rationnel [] t2, int nb) {
 		for(int i = 0; i < nb; ++i) {
 			Assert.assertTrue(t1[i].equals(t2[i]));

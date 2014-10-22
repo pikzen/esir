@@ -1,13 +1,11 @@
 package esir.tp2;
 
-
-import java.util.ArrayList;
 import java.util.Scanner;
 import rationnel.*;
 import types.*;
 
 public class TRationnel {
-	static Rationnel makeRationnel(int num, int den){
+	public static Rationnel makeRationnel(int num, int den){
 		Rationnel r1;
 		if (num % 2 == 0) {
 			r1 = new RationnelSimple(num, den);
@@ -23,7 +21,7 @@ public class TRationnel {
 	 * Saisie numérateur et dénominateur
 	 */
 
-	static Rationnel lireRationnel(Scanner input){
+	public static Rationnel lireRationnel(Scanner input){
 
 		int num = -1;
 		int den = -1;
@@ -39,7 +37,7 @@ public class TRationnel {
 
 	}
 
-	static void insererRationnel(Rationnel nouveau, Rationnel[] rationnels, int nb) {
+	public static void insererRationnel(Rationnel nouveau, Rationnel[] rationnels, int nb) {
 		int cpt;
 		Rationnel elementCourant;
 
@@ -62,13 +60,13 @@ public class TRationnel {
 
 	}
 
-	static void afficher(Rationnel[] elements, int nb) {
+	public static void afficher(Rationnel[] elements, int nb) {
 		for (int i = 0; i < nb; i++) {
 			System.out.println("Rationnel : " + elements[i] + ", Valeur : " + elements[i].valeur());
 		}
 	}
 
-	static void somme(Rationnel[] elements, int nb) {
+	public static void somme(Rationnel[] elements, int nb) {
 		Rationnel sum = makeRationnel(0, 1);
 
 		for (int i = 0; i < nb; i++) {

@@ -2,7 +2,6 @@ package rationnel;
 
 import java.util.Arrays;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Test;
 import types.Rationnel;
 import org.junit.runner.JUnitCore;

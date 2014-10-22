@@ -1,6 +1,5 @@
 package rationnel;
 
-import java.util.Scanner;
 import types.*;
 
 
@@ -25,8 +24,7 @@ public class RationnelSimple implements Rationnel {
 	* @param num Numérateur du rationnel
 	*/
 	public RationnelSimple(int num) {
-		this.Numerator     	= num;
-		this.Denominator 	= 1;
+		this(num, 1);
 	}
 
 	/**
@@ -36,8 +34,28 @@ public class RationnelSimple implements Rationnel {
 	*/
 
 	public RationnelSimple(int num, int den) {
-		Numerator 	= num;
-		Denominator = den;
+		if (num % den == 0 && den != 1) {
+			num = num / den;
+			den = 1;
+		}
+
+		this.Numerator 	= num;
+		this.Denominator = den;
+
+		int a = this.Numerator;
+		int b = this.Denominator;
+
+		// calcul du pgcd pour la simplification tu vois t'as vu
+		while(b > 0)
+		{
+			int c = a % b;
+			a = b;
+			b = c;
+		}
+
+		this.Numerator /= a;
+		this.Denominator /= a;
+
 	}
 
 	/**
@@ -45,8 +63,7 @@ public class RationnelSimple implements Rationnel {
 	* @param copy Rationnel à copier
 	*/
 	public RationnelSimple(Rationnel copy) {
-		this.Numerator	= copy.getNumerateur();
-		this.Denominator = copy.getDenominateur();
+		this(copy.getNumerateur(), copy.getDenominateur());
 	}
 
 	//===================================================================
@@ -64,8 +81,8 @@ public class RationnelSimple implements Rationnel {
 	// COMPARAISONS
 	//===================================================================
 	public boolean equals(Rationnel r2) {
-		return this.getDenominateur() == r2.getDenominateur() &&
-			this.getNumerateur() == r2.getNumerateur();
+
+		return this.getNumerateur() * r2.getDenominateur() == r2.getNumerateur() * this.getDenominateur();
 	}
 
 	public int compareTo(Rationnel r2) {
@@ -112,6 +129,7 @@ public class RationnelSimple implements Rationnel {
 
 			int num = this.getNumerateur() * factor1 + r2.getNumerateur() * factor2;
 			int den = den1;
+
 			result = new RationnelSimple(num, den);
 		}
 
@@ -122,6 +140,7 @@ public class RationnelSimple implements Rationnel {
 	* Renvoie l'inverse du ce rationnel
 	*/
 	public Rationnel inverse() {
+		assert this.getNumerateur() == 0 : this.getNumerateur();
 		return new RationnelSimple(this.getDenominateur(), this.getNumerateur());
 	}
 
