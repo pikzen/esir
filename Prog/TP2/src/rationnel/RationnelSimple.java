@@ -78,75 +78,7 @@ public class RationnelSimple implements Rationnel {
 	//===================================================================
 	// AUTRES
 	//===================================================================
-	/**
-	 * Fonction makeRationnel
-	 */
-	
-		static Rationnel makeRationnel(int num, int den){
-			
-			RationnelSimple r1 = new RationnelSimple(num, den);
-			
-			return r1;
-		}
 
-	
-	/**
-	 * Saisie numérateur et dénominateur
-	 */
-	
-	static Rationnel lireRationnel(Scanner input){
-		
-		int num;
-		int den;
-		
-		System.out.println("Entrez le numérateur : \n");
-		num = input.nextInt();
-		System.out.println("Entrez le dénominateur : \n");
-		den = input.nextInt();
-		
-		RationnelSimple resultat = new RationnelSimple(num, den);
-		
-		return resultat;
-		
-	}
-	
-	
-	/**
-	 * Méthode de tri
-	 */
-	
-	public static void InsertionTri(Rationnel[] tabTraitement, int taille) { /* La fonction  de tri par insertion */
-
-		int cpt;
-		Rationnel elementCourant;
-
-		for (int i = 1; i < taille; i++) {
-			elementCourant = tabTraitement[i]; /* Contient l'élément courant */
-			cpt = i - 1; /* Le compteur */
-
-			while (cpt >= 0 && tabTraitement[cpt].valeur() > elementCourant.valeur()) /* Tant que élément du dessous supérieur on le déplace */
-				
-			{
-				tabTraitement[cpt + 1] = tabTraitement[cpt]; /* on le déplace à la place d'après */
-				cpt--; /* le compteur décrémente */
-			}
-			tabTraitement[cpt + 1] = elementCourant; /* On met l'élément courant dans compteur +1 quand boucle finie */
-		}
-	}
-	
-	
-	/**
-	 * Méthode pour insérer un rationnel !!
-	 */
-	
-	
-	static void insererRationnel(Rationnel nouveau, Rationnel [] lesRationnels, int nb){
-		InsertionTri(lesRationnels, lesRationnels.length-1);
-		lesRationnels[lesRationnels.length] = nouveau;
-		InsertionTri(lesRationnels, lesRationnels.length-1);
-	}
-	
-	
 	/**
 	* Renvoie la valeur réelle de ce rationnel
 	*/
