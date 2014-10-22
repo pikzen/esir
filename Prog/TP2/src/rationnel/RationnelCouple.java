@@ -40,7 +40,7 @@ public class RationnelCouple implements Rationnel {
 		int a = num;
 		int b = den;
 
-		// calcul du pgcd pour la simplification tu vois t'as vu
+		// calcul du pgcd pour la simplification
 		while(b > 0)
 		{
 			int c = a % b;

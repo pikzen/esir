@@ -54,7 +54,7 @@ public class RationnelSimple implements Rationnel {
 		int a = this.Numerator;
 		int b = this.Denominator;
 
-		// calcul du pgcd pour la simplification tu vois t'as vu
+		// calcul du pgcd pour la simplification
 		while(b > 0)
 		{
 			int c = a % b;
