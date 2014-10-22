@@ -38,26 +38,23 @@ public class TRationnel {
 	}
 
 	public static void insererRationnel(Rationnel nouveau, Rationnel[] rationnels, int nb) {
-		int cpt;
-		Rationnel elementCourant;
-
 		// On insere l'élément, puis on trie
-		rationnels[nb + 1] = nouveau;
+		rationnels[nb] = nouveau;
+		nb++;
+		
 		for (int i = 1; i < nb; i++) {
-			elementCourant = rationnels[i]; /* Contient l'élément courant */
-			cpt = i - 1; /* Le compteur */
-
-			while (cpt >= 0 && rationnels[cpt].valeur() > elementCourant.valeur()) /* Tant que élément du dessous supérieur on le déplace */
-
+			int cpt = i; /* Le compteur */
+			
+			 /* Tant que élément du dessous supérieur on le déplace */
+			while (cpt > 0 && 
+				   rationnels[cpt - 1].valeur() > rationnels[cpt].valeur())
 			{
-				rationnels[cpt + 1] = rationnels[cpt]; /* on le déplace à la place d'après */
+				Rationnel tmp = rationnels[cpt];
+				rationnels[cpt] = rationnels[cpt - 1]; /* on le déplace à la place d'après */
+				rationnels[cpt - 1] = tmp;
 				cpt--; /* le compteur décrémente */
 			}
-			rationnels[cpt + 1] = elementCourant; /* On met l'élément courant dans compteur +1 quand boucle finie */
-		}
-
-		nb++;
-
+		}		
 	}
 
 	public static void afficher(Rationnel[] elements, int nb) {
