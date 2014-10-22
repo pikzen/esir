@@ -8,7 +8,13 @@ import types.*;
 
 public class TRationnel {
 	static Rationnel makeRationnel(int num, int den){
-		RationnelSimple r1 = new RationnelSimple(num, den);
+		Rationnel r1;
+		if (num % 2 == 0) {
+			r1 = new RationnelSimple(num, den);
+		}
+		else {
+			r1 = new RationnelCouple(num, den);
+		}
 
 		return r1;
 	}
