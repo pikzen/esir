@@ -14,7 +14,7 @@ public class RationnelCouple implements Rationnel {
 	* @param num NumÃ©rateur du rationnel
 	*/
 	public RationnelCouple (int num) {
-		this.Valeurs = new Couple<Integer, Integer>(num, 1);
+		this(num, 1);
 	}
 
 	/**
@@ -23,6 +23,34 @@ public class RationnelCouple implements Rationnel {
 	* @param den DÃ©nominateur du rationnel
 	*/
 	public RationnelCouple(int num, int den) {
+		assert den != 0;
+		
+		// Changement de signe si les deux parties sont de signe négatif
+		if (num < 0 && den < 0) {
+			num = -num;
+			den = -den;
+		}
+			
+		// Si on peut simplifier la fraction vers un résultat entier
+		if (num % den == 0 && den != 1) {
+			num = num / den;
+			den = 1;
+		}
+
+		int a = num;
+		int b = den;
+
+		// calcul du pgcd pour la simplification tu vois t'as vu
+		while(b > 0)
+		{
+			int c = a % b;
+			a = b;
+			b = c;
+		}
+
+		num /= a;
+		den /= a;
+		
 		this.Valeurs = new Couple<Integer, Integer>(num, den);
 	}
 
@@ -31,7 +59,7 @@ public class RationnelCouple implements Rationnel {
 	* @param copy Rationnel Ã  copier
 	*/
 	public RationnelCouple(Rationnel copy) {
-		this.Valeurs = new Couple<Integer, Integer>(copy.getNumerateur(), copy.getDenominateur());
+		this(copy.getNumerateur(), copy.getDenominateur());
 	}
 
 	//===================================================================

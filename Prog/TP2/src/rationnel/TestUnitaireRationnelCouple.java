@@ -9,10 +9,6 @@ import esir.tp2.TRationnel;
 
 public class TestUnitaireRationnelCouple {
 
-	public static void main(String[] args) {
-		JUnitCore.runClasses(TestUnitaireRationnelCouple.class);
-	}
-
 	@Test
 	// test constructeur à un paramètre
 	public void test_Constructeur1() {
