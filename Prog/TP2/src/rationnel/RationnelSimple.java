@@ -34,6 +34,8 @@ public class RationnelSimple implements Rationnel {
 	*/
 
 	public RationnelSimple(int num, int den) {
+		assert den != 0 : den;
+		
 		if (num % den == 0 && den != 1) {
 			num = num / den;
 			den = 1;
