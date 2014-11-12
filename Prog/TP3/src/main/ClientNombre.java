@@ -33,10 +33,12 @@ public class ClientNombre {
 	
 	public static void calculerNombresPremiers(int N, Array<Integer> tableauPremiers){
 		
-		estPremier(N, tableauPremiers);
 		
-		
-		
+		for(int i = 0; i < N; i++){
+			
+			estPremier(i, tableauPremiers);
+			
+		}
 		
 		
 	}
