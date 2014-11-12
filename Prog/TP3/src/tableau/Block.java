@@ -58,7 +58,7 @@ public class Block<T> implements Tableau<T> {
 	* @return Valeur de l'élément à l'indice i
 	*/
 	public T get(int i) {
-		assert i > 0 && i < this.size();
+		assert i >= 0 && i < this.size();
 
 		return this.Elements.get(i);
 	}
@@ -70,7 +70,7 @@ public class Block<T> implements Tableau<T> {
 	* @param elem Nouvelle valeur de l'élément
 	*/
 	public void set(int i, T elem) {
-		assert i > 0 && i < this.size();
+		assert i >= 0 && i < this.size();
 
 		this.Elements.set(i, elem);
 	}
@@ -81,7 +81,7 @@ public class Block<T> implements Tableau<T> {
 	* @pre !this.full()
 	*/
 	public void push_back(T elem) {
-		assert this.full();
+		assert !this.full();
 
 		this.Elements.set(Size, elem);
 		this.Size++;
@@ -92,7 +92,7 @@ public class Block<T> implements Tableau<T> {
 	* @pre !this.empty()
 	*/
 	public void pop_back() {
-		assert this.empty();
+		assert !this.empty();
 
 		this.Size--;
 	}
