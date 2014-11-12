@@ -15,31 +15,36 @@ public class ClientNombre {
 	}
 	
 
-	public static boolean estPremier(int n){
-		int compteur;
-		int test = 1;
-
-		  for (compteur = 2; compteur < n; compteur++)
-		    if (n % compteur == 0)
-		      test = 0;
-		  if (test == 1){
-		    System.out.println(n+" est un nombre premier");
-		    return true;
-		  }else{
-			  System.out.println(n+" n'est pas un nombre premier");
-			  return false;
-		  }
-	}
+	public static boolean estPremier(int n, Array<Integer> tableauPrems) {
+		
+		if (n < 0) { /* Si nombre négatif pas de nombre premier */
+			return false;
+		}
+		
+		for(int compteur = 0; compteur <= tableauPrems.length(); compteur++){
+			if(n%tableauPrems.get(compteur) == 0){ /* si le chiffre est premier avec le contenu du tableau à l'indice : compteur */
+				return false; /* On retourne faux */ 
+			}
+		}
+		return true;
+	}  
 	
 	
-	public static void calculerNombresPremiers(int N, Array<Integer> tableau){
+	
+	public static void calculerNombresPremiers(int N, Array<Integer> tableauPremiers){
+		
+		estPremier(N, tableauPremiers);
+		
+		
+		
+		
 		
 	}
 	
 	
 	public static void main(String[] args){
 		int n = saisie();
-		estPremier(n);
+		
 		
 	}
 }
