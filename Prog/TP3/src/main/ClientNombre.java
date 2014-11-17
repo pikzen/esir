@@ -1,7 +1,7 @@
 package main;
 
 import java.util.Scanner;
-import tableau.Array;
+import tableau.Block;
 
 public class ClientNombre {
 
@@ -15,38 +15,60 @@ public class ClientNombre {
 	}
 	
 
-	public static boolean estPremier(int n, Array<Integer> tableauPrems) {
+public static boolean estPremier(int n, Block<Integer> tableauPrems) {
 		
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
 		
-		for(int compteur = 0; compteur <= tableauPrems.length(); compteur++){
+		for(int compteur = 0; compteur <= tableauPrems.size(); compteur++){
 			if(n%tableauPrems.get(compteur) == 0){ /* si le chiffre est premier avec le contenu du tableau à l'indice : compteur */
-				return false; /* On retourne faux */ 
+				return false; /* On retourne faux */ 		
 			}
 		}
 		return true;
 	}  
 	
 	
-	
-	public static void calculerNombresPremiers(int N, Array<Integer> tableauPremiers){
+	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier)
+	{
+		int cpt = 0;
+		int g = 0;
 		
-		
-		for(int i = 0; i < N; i++){
+		while (!tableauPremier.full() && (cpt <= N)){
 			
-			estPremier(i, tableauPremiers);
+			if (estPremier(cpt, tableauPremier)){
 			
+				tableauPremier.set(g, cpt);
+				g++;
+			}
+			
+			cpt++;
 		}
 		
+		if (tableauPremier.full() && (cpt <= N)){
+			return cpt-1;	
+		}else{
+			return N;
+		}
+	}
+	
+	
+	public static void remplirHasard(int nb){
+		Block<Integer> tableau = new Block<Integer>(nb);
 		
 	}
 	
 	
+	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2){
+		
+	}
+	
 	public static void main(String[] args){
-		int n = saisie();
-		
-		
+		Block<Integer> tab = new Block<Integer>(100);
+		System.out.println("Entrez un nombre N");
+		int N = saisie();
+		int resultat = calculerNombrePremiers(N, tab);
+		System.out.println(resultat);
 	}
 }
