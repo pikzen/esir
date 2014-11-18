@@ -29,20 +29,20 @@ public class ClientNombre {
 	}
 
 	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
-		int lastInt = 2;
+		int lastInt = 2; /* Dernier entier testé */
 		
-		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) {
-			lastInt = i;
-			if (!estPremier(i, tableauPremier)) {
-				boolean isPrime = true;
-				for (int j = 0; j < tableauPremier.size(); j++) {
-					if (i % tableauPremier.get(j) == 0) {
+		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
+			lastInt = i; /* On met à jour le dernier entier testé */
+			if (!estPremier(i, tableauPremier)) { /* Si l'entier n'est pas premier */
+				boolean isPrime = true; /* Déclaration de la variable isPrime */
+				for (int j = 0; j < tableauPremier.size(); j++) { /* Pour chaque élément de tableauPremier */
+					if (i % tableauPremier.get(j) == 0) { /* Si l'élément testé n'est pas premier on met isPrime à false et on quitte la boucle */
 						isPrime = false;
 						break;
 					}
 				}
 				
-				if (isPrime) tableauPremier.push_back(i);
+				if (isPrime) tableauPremier.push_back(i); /* Si i est premier on le push_back dans le tableauPremier */
 			}
 		}
 		
@@ -50,17 +50,19 @@ public class ClientNombre {
 		
 	}
 
-	public static void remplirHasard(int nb) {
-		Block<Integer> newTableau = new Block<Integer>(nb); 
+	public static Block<Integer> remplirHasard(int nb) {
+		Block<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
 		
-		Random r1 = new Random();
+		Random r1 = new Random(); /* Sert à choisir un chiffre au hasard */
 
-		for (int i = 0; i < nb; i++) {
+		for (int i = 0; i < nb; i++) { /* Pour i jusqu'à nb-1 */
 
-			int nombre = (r1.nextInt(nb));
-			newTableau.set(i, nombre);
+			int nombre = (r1.nextInt(nb)); /* Je fais un random sur nb */
+			newTableau.push_back(nombre); /* Je le mets dans le tableau */
 
 		}
+		
+		return newTableau; /* Je retourne le tableau */
 	}
 
 	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
