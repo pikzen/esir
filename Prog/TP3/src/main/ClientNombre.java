@@ -14,65 +14,56 @@ public class ClientNombre {
 
 	}
 
-	public static Block<Integer> setTableau(int n, Block<Integer> tableauRemp) {
-
-		for (int cpt = 2; cpt <= n; cpt++) {
-
-			tableauRemp.set(cpt - 2, cpt);
-		}
-
-		return tableauRemp;
-	}
 
 	public static boolean estPremier(int n, Block<Integer> tableauPrems) {
-
-		for (int cpt = 2; cpt < n; cpt++) {
-
-			tableauPrems.set(cpt - 2, cpt);
-
-		}
-
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
 
 		for (int compteur = 0; compteur < tableauPrems.size(); compteur++) {
-
 			if (n % tableauPrems.get(compteur) == 0) {
-
-				return false; /* On retourne faux */
+				return true; /* On retourne faux */
 			}
 		}
-		return true;
+		return false;
 	}
 
 	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
-		int cpt = 0;
-		int g = 0;
-
-		while (!tableauPremier.full() && (cpt <= N)) {
-
-			if (estPremier(cpt, tableauPremier)) {
-
-				tableauPremier.set(g, cpt);
-				g++;
+		int lastInt = 2;
+		
+		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) {
+			lastInt = i;
+			if (!estPremier(i, tableauPremier)) {
+				boolean isPrime = true;
+				for (int j = 0; j < tableauPremier.size(); j++) {
+					if (i % tableauPremier.get(j) == 0) {
+						isPrime = false;
+						break;
+					}
+				}
+				
+				if (isPrime) tableauPremier.push_back(i);
 			}
-
-			cpt++;
 		}
-
-		if (tableauPremier.full() && (cpt <= N)) {
-			return cpt - 1;
-		} else {
+		
+		return lastInt;
+		/*
+		while(!tableauPremier.full() && i <= N){
+			if(estPremier(i, tableauPremier)){
+				tableauPremier.push_back(i);
+			}
+			i++;
+		}
+		if(tableauPremier.full() && (i <= N)){
+			return i-1;
+		}else{
 			return N;
-		}
+		}*/
 	}
 
 	public static void remplirHasard(int nb) {
-		Block<Integer> newTableau = new Block<Integer>(nb); /*
-															 * Tableau Block de
-															 * capacité nb
-															 */
+		Block<Integer> newTableau = new Block<Integer>(nb); 
+		
 		Random r1 = new Random();
 
 		for (int i = 0; i < nb; i++) {
@@ -98,8 +89,11 @@ public class ClientNombre {
 		Block<Integer> tab = new Block<Integer>(100);
 		System.out.println("Entrez un nombre N");
 		int N = saisie();
-		/* tab = setTableau(N, tab); */
-		boolean resultat = estPremier(N, tab);
-		System.out.println(resultat);
+		int last = calculerNombrePremiers(N, tab);
+		for (int i = 0; i < tab.size(); i++) {
+				System.out.println(tab.get(i));
+		}
+		System.out.println("Dernier élément testé : " + last);
+		
 	}
 }
