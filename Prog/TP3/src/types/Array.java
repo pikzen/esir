@@ -1,4 +1,4 @@
-package tableau;
+package types;
 
 public class Array<T> {
 

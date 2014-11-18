@@ -1,5 +1,6 @@
 package tableau;
 
+import types.Array;
 /**
 * Tableau redimensionnable, implémenté via un Array<T>
 */
@@ -24,6 +25,7 @@ public class Block<T> implements Tableau<T> {
 	* @param capacite Capacité maximale du tableau
 	*/
 	public Block(int capacite) {
+		assert !(cap > 0);
 		this.MaximumSize = capacite;
 		this.Elements = new Array<T>(capacite);
 	}

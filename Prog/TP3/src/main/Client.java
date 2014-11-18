@@ -1,6 +1,6 @@
 package main;
 
-import types.Tableau;
+import tableau.Tableau;
 import tableau.Block;
 import tableau.Tableau2x;
 import tableau.TableauBlock;

@@ -4,8 +4,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import tableau.Block;
+import tableau.Tableau;
 
-public class ClientNombre {
+public class NombresPremiers {
 
 	public static int saisie() {
 		int nombreSaisi;
@@ -15,7 +16,7 @@ public class ClientNombre {
 	}
 
 
-	public static boolean estPremier(int n, Block<Integer> tableauPrems) {
+	public static boolean estPremier(int n, Tableau<Integer> tableauPrems) {
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
@@ -28,10 +29,10 @@ public class ClientNombre {
 		return false;
 	}
 
-	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
+	public static int calculerNombresPremiers(int N, Tableau<Integer> tableauPremier) {
 		int lastInt = 2; /* Dernier entier testé */
 		
-		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
+		for (int i = 2; !tableauPremier.full() && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
 			lastInt = i; /* On met à jour le dernier entier testé */
 			if (!estPremier(i, tableauPremier)) { /* Si l'entier n'est pas premier */
 				boolean isPrime = true; /* Déclaration de la variable isPrime */
@@ -50,8 +51,8 @@ public class ClientNombre {
 		
 	}
 
-	public static Block<Integer> remplirHasard(int nb) {
-		Block<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
+	public static Tableau<Integer> remplirHasard(int nb) {
+		Tableau<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
 		
 		Random r1 = new Random(); /* Sert à choisir un chiffre au hasard */
 
@@ -65,7 +66,7 @@ public class ClientNombre {
 		return newTableau; /* Je retourne le tableau */
 	}
 
-	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
+	public static int eliminerPresents(Tableau<Integer> tab1, Tableau<Integer> tab2) {
 		
 		
 		for (int i = 0; i < tab1.size(); i++) { /* parcourir le tab1, penser dichotomie itérative*/
@@ -73,14 +74,16 @@ public class ClientNombre {
 			/* Pour chaque élément de tab1 faire fonction dichotomie*/
 			/* Voir comment supprimer l'élément courant */
 		}
+		
+		return -1;
 
 	}
 
 	public static void main(String[] args) {
-		Block<Integer> tab = new Block<Integer>(100);
+		Tableau<Integer> tab = new Block<Integer>(100);
 		System.out.println("Entrez un nombre N");
 		int N = saisie();
-		int last = calculerNombrePremiers(N, tab);
+		int last = calculerNombresPremiers(N, tab);
 		for (int i = 0; i < tab.size(); i++) {
 				System.out.println(tab.get(i));
 		}

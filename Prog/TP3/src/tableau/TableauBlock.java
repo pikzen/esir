@@ -1,5 +1,6 @@
 package tableau;
 
+import types.Array;
 /**
 * Tableau redimensionnable, implémenté via un Array<T>
 */
@@ -21,11 +22,17 @@ public class TableauBlock<T> implements Tableau<T> {
 
 	private int BlockSize;
 
+	public TableauBlock(int maxSize) {
+		this(maxSize, 128);
+	}
+
 	/**
 	* Construit un nouveau tableau de capacité maximale <code>capacite</code>
 	* @param capacite Capacité maximale du tableau
 	*/
 	public TableauBlock(int maxSize, int capaciteBlock) {
+			assert !(maxSize > 0);
+
 			int currentBlock = 0;
 			int currentTabSize = 0;
 			BlockSize = capaciteBlock;
@@ -33,7 +40,7 @@ public class TableauBlock<T> implements Tableau<T> {
 
 			// Calcul de la taille d'Elements
 			int subBlock = 0;
-			int copy = i;
+			int copy = maxSize;
 			while (copy > BlockSize) {
 				copy -= BlockSize;
 				subBlock++;
