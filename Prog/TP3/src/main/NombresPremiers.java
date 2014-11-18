@@ -16,7 +16,7 @@ public class NombresPremiers {
 	}
 
 
-	public static boolean estPremier(int n, Tableau<Integer> tableauPrems) {
+	public static boolean estPremier(int n, Block<Integer> tableauPrems) {
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
@@ -29,10 +29,10 @@ public class NombresPremiers {
 		return false;
 	}
 
-	public static int calculerNombresPremiers(int N, Tableau<Integer> tableauPremier) {
+	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
 		int lastInt = 2; /* Dernier entier testé */
 		
-		for (int i = 2; !tableauPremier.full() && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
+		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
 			lastInt = i; /* On met à jour le dernier entier testé */
 			if (!estPremier(i, tableauPremier)) { /* Si l'entier n'est pas premier */
 				boolean isPrime = true; /* Déclaration de la variable isPrime */
@@ -51,8 +51,8 @@ public class NombresPremiers {
 		
 	}
 
-	public static Tableau<Integer> remplirHasard(int nb) {
-		Tableau<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
+	public static Block<Integer> remplirHasard(int nb) {
+		Block<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
 		
 		Random r1 = new Random(); /* Sert à choisir un chiffre au hasard */
 
@@ -66,27 +66,42 @@ public class NombresPremiers {
 		return newTableau; /* Je retourne le tableau */
 	}
 
-	public static int eliminerPresents(Tableau<Integer> tab1, Tableau<Integer> tab2) {
+	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
 		
+		int nbElementsSupprimes = 0;
+		Block<Integer> tabFinal = new Block<Integer>(tab1.size());
+		int g = 0;
 		
-		for (int i = 0; i < tab1.size(); i++) { /* parcourir le tab1, penser dichotomie itérative*/
+		for(int i = 0; i < tab1.size(); i++){ /* Parcourir chaque élément du tableau ou on supprime */
 			
-			/* Pour chaque élément de tab1 faire fonction dichotomie*/
-			/* Voir comment supprimer l'élément courant */
+			for(int j = 0; j < tab2.size(); j++){ /* Parcourir tout les éléments du tableau 2*/
+				
+				if(tab1.get(i) == tab2.get(j)){ /* Si un élément t1 == un élement de t2 */
+					tabFinal.push_back(tab1.get(i));
+					nbElementsSupprimes++; /* On incrémente la variable des éléments à supprimer */
+					break; /* On sort de la boucle */
+				}
+			}
 		}
 		
-		return -1;
+		for(int f = 0; f < nbElementsSupprimes; f++){
+			tabFinal.pop_back();
+		}
 
 	}
 
 	public static void main(String[] args) {
-		Tableau<Integer> tab = new Block<Integer>(100);
+		Block<Integer> tab = new Block<Integer>(100);
+		
 		System.out.println("Entrez un nombre N");
 		int N = saisie();
-		int last = calculerNombresPremiers(N, tab);
+		
+		int last = calculerNombrePremiers(N, tab);
+		
 		for (int i = 0; i < tab.size(); i++) {
 				System.out.println(tab.get(i));
 		}
+		
 		System.out.println("Dernier élément testé : " + last);
 		
 	}
