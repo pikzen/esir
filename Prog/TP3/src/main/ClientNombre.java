@@ -47,18 +47,7 @@ public class ClientNombre {
 		}
 		
 		return lastInt;
-		/*
-		while(!tableauPremier.full() && i <= N){
-			if(estPremier(i, tableauPremier)){
-				tableauPremier.push_back(i);
-			}
-			i++;
-		}
-		if(tableauPremier.full() && (i <= N)){
-			return i-1;
-		}else{
-			return N;
-		}*/
+		
 	}
 
 	public static void remplirHasard(int nb) {
