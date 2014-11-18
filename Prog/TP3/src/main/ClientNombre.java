@@ -50,17 +50,19 @@ public class ClientNombre {
 		
 	}
 
-	public static void remplirHasard(int nb) {
-		Block<Integer> newTableau = new Block<Integer>(nb); 
+	public static Block<Integer> remplirHasard(int nb) {
+		Block<Integer> newTableau = new Block<Integer>(nb); /* Le tableau newTableau de capacité nb qu'on doit retourner */
 		
-		Random r1 = new Random();
+		Random r1 = new Random(); /* Sert à choisir un chiffre au hasard */
 
-		for (int i = 0; i < nb; i++) {
+		for (int i = 0; i < nb; i++) { /* Pour i jusqu'à nb-1 */
 
-			int nombre = (r1.nextInt(nb));
-			newTableau.set(i, nombre);
+			int nombre = (r1.nextInt(nb)); /* Je fais un random sur nb */
+			newTableau.push_back(nombre); /* Je le mets dans le tableau */
 
 		}
+		
+		return newTableau; /* Je retourne le tableau */
 	}
 
 	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
