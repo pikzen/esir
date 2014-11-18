@@ -29,20 +29,20 @@ public class ClientNombre {
 	}
 
 	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
-		int lastInt = 2;
+		int lastInt = 2; /* Dernier entier testé */
 		
-		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) {
-			lastInt = i;
-			if (!estPremier(i, tableauPremier)) {
-				boolean isPrime = true;
-				for (int j = 0; j < tableauPremier.size(); j++) {
-					if (i % tableauPremier.get(j) == 0) {
+		for (int i = 2; tableauPremier.size() < 100 && i <= N; i++) { /* Tant que i < taille du tableau et <= à N */
+			lastInt = i; /* On met à jour le dernier entier testé */
+			if (!estPremier(i, tableauPremier)) { /* Si l'entier n'est pas premier */
+				boolean isPrime = true; /* Déclaration de la variable isPrime */
+				for (int j = 0; j < tableauPremier.size(); j++) { /* Pour chaque élément de tableauPremier */
+					if (i % tableauPremier.get(j) == 0) { /* Si l'élément testé n'est pas premier on met isPrime à false et on quitte la boucle */
 						isPrime = false;
 						break;
 					}
 				}
 				
-				if (isPrime) tableauPremier.push_back(i);
+				if (isPrime) tableauPremier.push_back(i); /* Si i est premier on le push_back dans le tableauPremier */
 			}
 		}
 		
