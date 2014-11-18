@@ -13,33 +13,33 @@ public class ClientNombre {
 		return nombreSaisi = sc.nextInt();
 
 	}
-	
+
 	public static Block<Integer> setTableau(int n, Block<Integer> tableauRemp) {
-		
+
 		for (int cpt = 2; cpt <= n; cpt++) {
 
-			tableauRemp.set(cpt-2, cpt);
+			tableauRemp.set(cpt - 2, cpt);
 		}
-		
+
 		return tableauRemp;
 	}
 
 	public static boolean estPremier(int n, Block<Integer> tableauPrems) {
-		
+
 		for (int cpt = 2; cpt < n; cpt++) {
 
-			tableauPrems.set(cpt-2, cpt);
-			
+			tableauPrems.set(cpt - 2, cpt);
+
 		}
-		
+
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
 
 		for (int compteur = 0; compteur < tableauPrems.size(); compteur++) {
-			
-			if (n % tableauPrems.get(compteur) == 0) { 
-				
+
+			if (n % tableauPrems.get(compteur) == 0) {
+
 				return false; /* On retourne faux */
 			}
 		}
@@ -83,18 +83,22 @@ public class ClientNombre {
 		}
 	}
 
-	
 	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
-
 		
+		
+		for (int i = 0; i < tab1.size(); i++) { /* parcourir le tab1, penser dichotomie itérative*/
+			
+			/* Pour chaque élément de tab1 faire fonction dichotomie*/
+			/* Voir comment supprimer l'élément courant */
+		}
+
 	}
 
-	
 	public static void main(String[] args) {
 		Block<Integer> tab = new Block<Integer>(100);
 		System.out.println("Entrez un nombre N");
 		int N = saisie();
-		/*tab = setTableau(N, tab);*/
+		/* tab = setTableau(N, tab); */
 		boolean resultat = estPremier(N, tab);
 		System.out.println(resultat);
 	}
