@@ -73,6 +73,7 @@ public class Block<T> implements Tableau<T> {
 		assert i >= 0 && i < this.size();
 
 		this.Elements.set(i, elem);
+		this.Size++;
 	}
 
 	/**
