@@ -89,8 +89,9 @@ public class NombresPremiers {
 		return newTableau;
 	}
 
-	public static void eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
+	public static int eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
 		
+		int elementsSupprimes = 0;
 		
 		for (int i = 0; i < tab1.size(); i++) { /* parcourir le tab1, penser dichotomie itérative*/
 			
@@ -99,11 +100,15 @@ public class NombresPremiers {
 			
 			for(int cpt = 0; cpt < tab2.size(); cpt++){
 				if(tab1.get(i) == tab2.get(cpt)){
+					elementsSupprimes++;
 					tab1.push_back(tab1.get(i));
+					tab1.set(i, null);
 					tab1.pop_back();
 				}
 			}
 		}
+		
+		return elementsSupprimes;
 
 	}
 
