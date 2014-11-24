@@ -114,11 +114,13 @@ public class NombresPremiers {
 
 	public static void main(String[] args) {
 		Block<Integer> tab = new Block<Integer>(100);
+		Block<Integer> tab2 = new Block<Integer>(100);
 		System.out.println("Entrez un nombre N");
 		int N = saisie();
 		/* tab = setTableau(N, tab); */
 		/*boolean resultat = estPremier(N, tab);
 		System.out.println(resultat);*/
 		tab = remplirHasard(N);
+		int resultat = eliminerPresents(tab, tab2);
 	}
 }
