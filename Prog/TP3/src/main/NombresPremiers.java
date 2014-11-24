@@ -96,6 +96,13 @@ public class NombresPremiers {
 			
 			/* Pour chaque élément de tab1 faire fonction dichotomie*/
 			/* Voir comment supprimer l'élément courant */
+			
+			for(int cpt = 0; cpt < tab2.size(); cpt++){
+				if(tab1.get(i) == tab2.get(cpt)){
+					tab1.push_back(tab1.get(i));
+					tab1.pop_back();
+				}
+			}
 		}
 
 	}
