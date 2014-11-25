@@ -3,6 +3,7 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
+import tableau.Tableau;
 import tableau.Block;
 
 public class NombresPremiers {
@@ -24,7 +25,7 @@ public class NombresPremiers {
 		return tableauRemp;
 	}
 
-	public static boolean estPremier(int n, Block<Integer> tableauPrems) {
+	public static boolean estPremier(int n, Tableau<Integer> tableauPrems) {
 
 		for (int cpt = 2; cpt < n; cpt++) {
 
@@ -46,7 +47,7 @@ public class NombresPremiers {
 		return true;
 	}
 
-	static int calculerNombrePremiers(int N, Block<Integer> tableauPremier) {
+	public static int calculerNombresPremiers(int N, Tableau<Integer> tableauPremier) {
 		int cpt = 0;
 		int g = 0;
 
@@ -89,7 +90,7 @@ public class NombresPremiers {
 		return newTableau;
 	}
 
-	public static int eliminerPresents(Block<Integer> tab1, Block<Integer> tab2) {
+	public static int eliminerPresents(Tableau<Integer> tab1, Tableau<Integer> tab2) {
 		
 		int elementsSupprimes = 0;
 		
