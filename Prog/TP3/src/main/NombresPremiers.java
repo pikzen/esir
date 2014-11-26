@@ -26,10 +26,6 @@ public class NombresPremiers {
 	}
 
 	public static boolean estPremier(int n, Tableau<Integer> tableauPrems) {
-		for (int cpt = 2; cpt < n; cpt++) {
-			tableauPrems.push_back(cpt);
-		}
-
 		if (n < 0) { /* Si nombre négatif pas de nombre premier */
 			return false;
 		}
@@ -48,16 +44,17 @@ public class NombresPremiers {
 	}
 
 	public static int calculerNombresPremiers(int N, Tableau<Integer> tableauPremier) {
-		int cpt = 0;
-		int g = 0;
+		int cpt = 2;
+		
 		while (!tableauPremier.full() && (cpt <= N)) {
+			
 			if (estPremier(cpt, tableauPremier)) {
 				tableauPremier.push_back(cpt);
-				g++;
 			}
 			cpt++;
-			System.out.println("CPT : " + cpt + ", N : " + N + ", IS FULL : " + tableauPremier.full());
 		}
+		
+		System.out.println("Tableau is full lololol cpt = " + N);
 		
 
 		if (tableauPremier.full() && (cpt <= N)) {
