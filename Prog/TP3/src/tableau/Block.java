@@ -25,7 +25,7 @@ public class Block<T> implements Tableau<T> {
 	* @param capacite Capacité maximale du tableau
 	*/
 	public Block(int capacite) {
-		assert !(cap > 0);
+		assert (capacite > 0);
 		this.MaximumSize = capacite;
 		this.Elements = new Array<T>(capacite);
 	}
@@ -60,7 +60,7 @@ public class Block<T> implements Tableau<T> {
 	* @return Valeur de l'élément à l'indice i
 	*/
 	public T get(int i) {
-		assert i >= 0 && i < this.size();
+		assert i >= 0 && i < this.size() : "i is " + i + ", size is " + Size;
 
 		return this.Elements.get(i);
 	}
@@ -72,10 +72,9 @@ public class Block<T> implements Tableau<T> {
 	* @param elem Nouvelle valeur de l'élément
 	*/
 	public void set(int i, T elem) {
-		assert i >= 0 && i < this.size();
+		assert i >= 0 && i < this.size() : "i is " + i + ", size is " + Size;
 
 		this.Elements.set(i, elem);
-		this.Size++;
 	}
 
 	/**
@@ -86,8 +85,8 @@ public class Block<T> implements Tableau<T> {
 	public void push_back(T elem) {
 		assert !this.full();
 
-		this.Elements.set(Size, elem);
 		this.Size++;
+		this.Elements.set(Size - 1, elem);
 	}
 
 	/**

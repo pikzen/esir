@@ -22,6 +22,21 @@ public class TableauBlock<T> implements Tableau<T> {
 
 	private int BlockSize;
 
+	private int findBlock(int idx) {
+		int pos = 0;
+
+		while (idx - BlockSize > BlockSize) {
+			pos++;
+			idx -= BlockSize;
+		}
+
+		return pos;
+	}
+
+	private int findPos(int idx) {
+		return idx - (idx * findBlock(idx));
+	}
+
 	public TableauBlock(int maxSize) {
 		this(maxSize, 128);
 	}
@@ -31,29 +46,14 @@ public class TableauBlock<T> implements Tableau<T> {
 	* @param capacite Capacité maximale du tableau
 	*/
 	public TableauBlock(int maxSize, int capaciteBlock) {
-			assert !(maxSize > 0);
+			assert (maxSize > 0) : "MaxSize should be > 0, MaxSize is :" + maxSize;
 
-			int currentBlock = 0;
-			int currentTabSize = 0;
 			BlockSize = capaciteBlock;
 			MaximumSize = maxSize;
 
-			// Calcul de la taille d'Elements
-			int subBlock = 0;
-			int copy = maxSize;
-			while (copy > BlockSize) {
-				copy -= BlockSize;
-				subBlock++;
-			}
-			Elements = new Array(subBlock+1);
-
-
-			while (currentTabSize < maxSize) {
-				Block<T> block = new Block<T>(capaciteBlock);
-				Elements.set(currentBlock, block);
-
-				currentTabSize += capaciteBlock;
-				currentBlock++;
+			Elements = new Array(findBlock(MaximumSize) + 1);
+			for (int i = 0; i < Elements.length(); i++) {
+				Elements.set(i, new Block<T>(BlockSize));
 			}
 	}
 
@@ -89,14 +89,7 @@ public class TableauBlock<T> implements Tableau<T> {
 	public T get(int i) {
 		assert i >= 0 && i < this.size();
 
-		int subBlock = 0;
-		int copy = i;
-		while (copy > BlockSize) {
-			copy -= BlockSize;
-			subBlock++;
-		}
-		int blockPos = i - (subBlock * BlockSize);
-		return this.Elements.get(subBlock).get(blockPos);
+		return this.Elements.get(findBlock(i)).get(findPos(i));
 	}
 
 	/**
@@ -106,17 +99,9 @@ public class TableauBlock<T> implements Tableau<T> {
 	* @param elem Nouvelle valeur de l'élément
 	*/
 	public void set(int i, T elem) {
-		assert i >= 0 && i < this.size();
+		assert i >= 0 && i < this.size() : "i is " + i + ", size is " + this.size();
 
-		int subBlock = 0;
-		int copy = i;
-		while (copy > BlockSize) {
-			copy -= BlockSize;
-			subBlock++;
-		}
-		int blockPos = i - (subBlock * BlockSize);
-
-		this.Elements.get(subBlock).set(blockPos, elem);
+		this.Elements.get(findBlock(i)).set(findPos(i), elem);
 	}
 
 	/**
@@ -127,12 +112,14 @@ public class TableauBlock<T> implements Tableau<T> {
 	public void push_back(T elem) {
 		assert !this.full();
 
-		this.set(Size, elem);
 		this.Size++;
-
 		if (this.full()) {
+			System.out.println("==============================\n\n\n\n\n");
+			System.out.println("ELEMENTS HAS " + Elements.length());
 			this.resize();
+			System.out.println("RESIZED HAS " + Elements.length());
 		}
+		this.Elements.get(Elements.length() - 1).push_back(elem);
 	}
 
 	/**
@@ -156,6 +143,8 @@ public class TableauBlock<T> implements Tableau<T> {
 		for (int i = 0; i < newArray.length() - 2; i++) {
 			newArray.set(i, Elements.get(i));
 		}
-		newArray.set(newArray.length() - 1, new Block<T>(BlockSize));
+		newArray.set(newArray.length() -1 , new Block<T>(BlockSize));
+
+		this.Elements = newArray;
 	}
 }
