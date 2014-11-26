@@ -2,6 +2,7 @@ package test;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 import tableau.Tableau2x;
 import tableau.Tableau;
@@ -11,6 +12,13 @@ public class TU_Tableau2x extends ATU_Tableau {
   public Tableau<Integer> makeTableau(int capinit) {
     return new Tableau2x<Integer>(capinit);
   }
+  
+	@BeforeClass
+	public static void once() {
+		System.out.println("=================================================");
+		System.out.println("Sous-type : Tableau2x");
+		System.out.println("=================================================");
+	}
 
   // push_back sans agrandissement : empty, size, full
   @Test
