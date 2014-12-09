@@ -2,11 +2,20 @@ package test;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 import tableau.Tableau;
 
 public abstract class ATU_Tableau
 {
+	
+	@BeforeClass
+	public static void once() {
+		System.out.println();
+		System.out.println("=================================================");
+		System.out.println("Tableau");
+		System.out.println("=================================================");
+	}
   // constructeur : test assertion 0 < capacite
   @Test(expected=AssertionError.class)
   public void testConstructeurEchecAssertionCapacite() {

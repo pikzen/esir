@@ -23,18 +23,11 @@ public class TableauBlock<T> implements Tableau<T> {
 	private int BlockSize;
 
 	private int findBlock(int idx) {
-		int pos = 0;
-
-		while (idx - BlockSize > BlockSize) {
-			pos++;
-			idx -= BlockSize;
-		}
-
-		return pos;
+		return idx / BlockSize;
 	}
 
 	private int findPos(int idx) {
-		return idx - (idx * findBlock(idx));
+		return idx - (BlockSize * findBlock(idx));
 	}
 
 	public TableauBlock(int maxSize) {
@@ -87,8 +80,8 @@ public class TableauBlock<T> implements Tableau<T> {
 	* @return Valeur de l'élément à l'indice i
 	*/
 	public T get(int i) {
-		assert i >= 0 && i < this.size();
-
+		assert i >= 0 && i < this.Size;
+		
 		return this.Elements.get(findBlock(i)).get(findPos(i));
 	}
 
@@ -112,14 +105,11 @@ public class TableauBlock<T> implements Tableau<T> {
 	public void push_back(T elem) {
 		assert !this.full();
 
+		this.Elements.get(findBlock(Size)).push_back(elem);
 		this.Size++;
 		if (this.full()) {
-			System.out.println("==============================\n\n\n\n\n");
-			System.out.println("ELEMENTS HAS " + Elements.length());
 			this.resize();
-			System.out.println("RESIZED HAS " + Elements.length());
 		}
-		this.Elements.get(Elements.length() - 1).push_back(elem);
 	}
 
 	/**
@@ -139,8 +129,8 @@ public class TableauBlock<T> implements Tableau<T> {
 	private void resize() {
 		this.MaximumSize += BlockSize;
 
-		Array<Block<T>> newArray = new Array(Elements.length() + 1);
-		for (int i = 0; i < newArray.length() - 2; i++) {
+		Array<Block<T>> newArray = new Array<Block<T>>(Elements.length() + 1);
+		for (int i = 0; i < Elements.length(); i++) {
 			newArray.set(i, Elements.get(i));
 		}
 		newArray.set(newArray.length() -1 , new Block<T>(BlockSize));

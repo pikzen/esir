@@ -2,11 +2,19 @@ package test;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.BeforeClass;
 
 import tableau.TableauBlock;
 import tableau.Tableau;
 
 public class TU_TableauBlock extends TU_Tableau2x {
+	
+	@BeforeClass
+	public static void once() {
+		System.out.println("=================================================");
+		System.out.println("Sous-type : TableauBlock");
+		System.out.println("=================================================");
+	}
 
   // À changer selon besoin
   public Tableau<Integer> makeTableau(int capinit, int capabloc) {
