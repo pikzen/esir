@@ -17,15 +17,25 @@ public class TriTas {
 			tnb[p] = tnb [indicePere]; 
 			tnb[indicePere] = temp;
 			p = indicePere;
+			
 		}
 	}
 	
 	static void supprimerMax(int [] tnb, int p) {
-		assert (p >=1 && p < tnb.length);
+		assert (p >1 && p <= tnb.length);
+		
+		tnb[0] = tnb[p];
+		
+		
+		/* Mettre la valeur d'indice p à la racine, checker si les fils sont plus grands, le mettre a sa place et mettre le fils le plus grand en valeurMax */
+		
+		
+		
+		
 	}
 	
 	public static void trier(int [] tnb, int nb) {
-		assert (nb >= 1 && nb < tnb.length);
+		assert (nb >= 1 && nb <= tnb.length);
 	}
 	
 	
