@@ -39,4 +39,17 @@ public class ClientProgram {
 		return tableau;
 	}
 	
+	public static void main(String[] args){
+		
+		int[] tableau = new int[] {5, 9, 4, 63, 8, 7, 12, 75, 62, 15};
+		for(int i = 0; i < tableau.length; i++){
+			System.out.print(tableau[i]+" ");
+		}
+		TriTas.ajouterTas(tableau, 10);
+		System.out.println();
+		for(int i = 0; i < tableau.length; i++){
+			System.out.print(tableau[i]+" ");
+		}
+	}
+	
 }

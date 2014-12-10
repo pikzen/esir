@@ -9,7 +9,7 @@ public class TriTas {
 		assert (p >=1 && p < tnb.length);
 		/* Quand on insère, tant que p >= 1 et que le fils est plus grand on monte */
 		
-		int indicePere = (p-1)/2;
+		int indicePere = (p-2)/2;
 		
 		while(indicePere >= 0){ /* Tant que l'indice du pere est < à l'indice de p*/
 			while (indicePere * 2 + 1 <=  p - 1) {
@@ -19,7 +19,7 @@ public class TriTas {
 				if (tnb[swap] < tnb[enfant]) {
 					swap = enfant;
 				}
-				if (enfant+1 <= p && tnb[swap] < tnb[enfant + 1]) {
+				if (enfant+1 <= p - 1 && tnb[swap] < tnb[enfant + 1]) {
 					swap = enfant + 1;
 				}
 				if (swap == indicePere) {
