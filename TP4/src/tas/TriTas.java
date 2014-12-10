@@ -11,13 +11,29 @@ public class TriTas {
 		
 		int indicePere = (p-1)/2;
 		
-		while(p >= 1 && tnb[indicePere]<tnb[p]){ /* Tant que l'indice du pere est < à l'indice de p*/
-		
-			int temp = tnb[p]; /* Wllh j'crois que ça marche */
-			tnb[p] = tnb [indicePere]; 
-			tnb[indicePere] = temp;
-			p = indicePere;
-			
+		while(indicePere >= 0){ /* Tant que l'indice du pere est < à l'indice de p*/
+			while (indicePere * 2 + 1 <=  p - 1) {
+				int enfant = indicePere*2 + 1;
+				int swap = indicePere;
+
+				if (tnb[swap] < tnb[enfant]) {
+					swap = enfant;
+				}
+				if (enfant+1 <= p && tnb[swap] < tnb[enfant + 1]) {
+					swap = enfant + 1;
+				}
+				if (swap == indicePere) {
+					break;
+				}
+				else {
+					int tmp = tnb[indicePere];
+					tnb[indicePere] = tnb[swap];
+					tnb[swap] = tmp;
+
+					indicePere = swap;
+				}
+			}			
+			indicePere--;
 		}
 	}
 	
