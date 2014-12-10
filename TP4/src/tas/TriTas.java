@@ -1,4 +1,4 @@
-package MangeMaTeub;
+package tas;
 
 public class TriTas {
 	

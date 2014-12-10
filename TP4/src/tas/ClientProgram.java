@@ -1,4 +1,4 @@
-package MangeMaTeub;
+package tas;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
