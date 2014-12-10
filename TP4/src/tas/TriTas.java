@@ -40,18 +40,56 @@ public class TriTas {
 	static void supprimerMax(int [] tnb, int p) {
 		assert (p >1 && p <= tnb.length);
 		
-		tnb[0] = tnb[p];
+		int tmp = tnb[0];
+		tnb[0] = tnb[p-1];
+		tnb[p-1] = tmp;
 		
-		
-		/* Mettre la valeur d'indice p à la racine, checker si les fils sont plus grands, le mettre a sa place et mettre le fils le plus grand en valeurMax */
-		
-		
-		
+		int index = 0;
+		int lower = tnb[0];
+		int lowerIndex = 0;
+		while(tnb[2*index+1] > tnb[index] || 
+			   tnb[2*index+2] > tnb[index]){
+
+			if(tnb[2*index+1] > tnb[index]){
+				lower = tnb[2*index+1];
+				lowerIndex = 2*index+1;
+			}
+			
+			if(tnb[2*index+2] > tnb[index]){
+				if(tnb[2*index+2] > lower){
+					lower = tnb[2*index+2];
+					lowerIndex = 2*index+2;
+				}
+			}
+			
+			int tempLow = tnb[index];
+			tnb[index] = tnb[lowerIndex];
+			tnb[lowerIndex] = tempLow;
+			
+			if (index == lowerIndex) {
+				break;
+			}
+			
+			index = lowerIndex;
+			if (2*index + 1 > p-2 || 2*index+2 > p-2) {
+				System.out.println("Ca dépasse");
+				return;
+			}
+			System.out.println("Index is " + index);
+		}
 		
 	}
 	
 	public static void trier(int [] tnb, int nb) {
 		assert (nb >= 1 && nb <= tnb.length);
+		TriTas.ajouterTas(tnb, nb);
+		
+		int tabSize = nb;
+		while (tabSize > 0) {
+			System.out.println("Restant a trier : " + tabSize);
+			TriTas.supprimerMax(tnb, tabSize);
+			tabSize--;
+		}
 	}
 	
 	

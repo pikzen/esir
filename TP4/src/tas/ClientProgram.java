@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import outilsTris.OutilsTris;
+
 public class ClientProgram {
 
 	
@@ -39,17 +41,35 @@ public class ClientProgram {
 		return tableau;
 	}
 	
+	private static void printTab(int[] tab) {
+		for(int i = 0; i < tab.length; i++){
+			System.out.print(tab[i]+" ");
+		}
+		System.out.println();
+	}
+	
 	public static void main(String[] args){
 		
-		int[] tableau = new int[] {5, 9, 4, 63, 8, 7, 12, 75, 62, 15};
-		for(int i = 0; i < tableau.length; i++){
-			System.out.print(tableau[i]+" ");
-		}
+		int[] tab = OutilsTris.lireTableau("/private/student/4/34/15006534/esir/donnees_00097");
+		TriTas.trier(tab, tab.length);
+		printTab(tab);
+		/*int[] tableau = new int[] {5, 9, 4, 63, 8, 7, 12, 75, 62, 15};
+		printTab(tableau);
 		TriTas.ajouterTas(tableau, 10);
-		System.out.println();
-		for(int i = 0; i < tableau.length; i++){
-			System.out.print(tableau[i]+" ");
-		}
+		printTab(tableau);
+		
+		
+		System.out.println("========================================================");
+		System.out.println("========================================================");
+		
+		int tabSize = tableau.length;
+		printTab(tableau);
+		while (tabSize > 0) {
+			TriTas.supprimerMax(tableau, tabSize);
+			printTab(tableau);
+			tabSize--;
+		}*/
+		
 	}
 	
 }
