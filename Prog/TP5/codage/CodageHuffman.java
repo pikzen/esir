@@ -1,7 +1,13 @@
 package codage;
-import types.ABinHuffman;
-import types.ListeABH;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import outilsHuffman.OutilsHuffman;
+import types.ABinHuffman;
+import types.Couple;
+import types.ListeABH;
 
 /**
  * Réalisation du codage d'un texte par la méthode de Huffman
@@ -78,7 +84,25 @@ public class CodageHuffman
    */
   public static int [] calculerFrequences(char [] tcar)
   {
-	  return null;
+	  int[] bob = new int[256];
+	  
+	  /* Parcourir le tableau des caractères du texte, incrémenter quand caractère trouvé ! */
+	  for(int i = 0; i < tcar.length; i++){
+		  bob[tcar[i]]++;
+	  }
+	  
+	  return bob;
+  }
+  
+  
+  public static int minimum(List<Couple<Character, Integer>> arbre){
+	  
+	  int min;
+	  
+	  /* Je parcours ma liste de couples, je cherche le min */
+	  
+	  
+	  return 0;
   }
 
   /**
@@ -89,6 +113,22 @@ public class CodageHuffman
    */
   public static ABinHuffman construireArbreHuffman(int [] tableFrequences)
   {
+	  List<Couple<Character, Integer>> bob = new ArrayList<Couple<Character, Integer>>();
+	  
+	  for(int i = 0; i < tableFrequences.length; i++){
+		  if(tableFrequences[i] != 0){
+			  bob.add(new Couple<Character, Integer>((char) i, tableFrequences[i]));
+		  }
+	  }
+	  Collections.sort(bob ,new Comparator<Couple<Character, Integer>>() {
+		@Override
+		public int compare(Couple<Character, Integer> arg0,
+				Couple<Character, Integer> arg1) {
+			return arg0.deuxieme().compareTo(arg1.deuxieme());
+		}
+		  
+	  });
+	  
 	  return null;
   }
 
