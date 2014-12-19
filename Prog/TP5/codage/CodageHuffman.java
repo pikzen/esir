@@ -102,16 +102,16 @@ public class CodageHuffman
    */
   public static ABinHuffman construireArbreHuffman(int [] tableFrequences)
   {
-	  List<ABinHuffman> bob = new ArrayList<ABinHuffman>();
+	  List<ABinHuffman> bob = new ArrayList<ABinHuffman>(); /* Liste à retourner */
 	  
-	  for(int i = 0; i < tableFrequences.length; i++){
-		  if(tableFrequences[i] != 0){
+	  for(int i = 0; i < tableFrequences.length; i++){ /* Pour chaque élément du tableau tableFréquences */
+		  if(tableFrequences[i] != 0){ /* Si le code ASCII i est présent au moins une fois */
 			  ABinHuffman  elem = new ABinHuffman();
 			  elem.setValeur(new Couple<Character, Integer>((char) i, tableFrequences[i]));
 			  bob.add(elem);
 		  }
 	  }
-	  Collections.sort(bob ,new Comparator<ABinHuffman>() {
+	  Collections.sort(bob ,new Comparator<ABinHuffman>() { /* Pour trier notre arbre bin */
 
 		@Override
 		public int compare(ABinHuffman o1, ABinHuffman o2) {
@@ -123,30 +123,30 @@ public class CodageHuffman
 	  
 	  while(bob.size() != 1){ /* Tant qu'il reste plus d'un caractère */
 		
-		  ABinHuffman tree = new ABinHuffman();
-		  int percent = bob.get(0).getValeur().deuxieme()+bob.get(1).getValeur().deuxieme();
+		  ABinHuffman tree = new ABinHuffman(); /* Notre arbre à ajouter dans bob */
+		  int percent = bob.get(0).getValeur().deuxieme()+bob.get(1).getValeur().deuxieme(); /* Pour la valeur du père */
 		  
 		  tree.setValeur(new Couple<Character, Integer>('b', percent));
-		  ABinHuffman left = new ABinHuffman();
+		  ABinHuffman left = new ABinHuffman(); /* Pour la valeur de gauche */
 		  left.setValeur(bob.get(0).getValeur());
 		  tree.setGauche(left);
 		  
-		  ABinHuffman right = new ABinHuffman();
+		  ABinHuffman right = new ABinHuffman(); /* Pour la valeur de droite */
 		  right.setValeur(bob.get(1).getValeur());
 		  tree.setDroit(right);
 		  
 		  int index = 0;
-		  while (bob.get(index).getValeur().deuxieme() >= tree.getValeur().deuxieme()) {
+		  while (bob.get(index).getValeur().deuxieme() >= tree.getValeur().deuxieme()) { /* Pour l'indexer au bon endroit */
 			  index++;
 		  }
-		  bob.add(index, tree);
+		  bob.add(index, tree); /* On ajoute l'arbre à bob */
 		  
-		  bob.remove(0);
+		  bob.remove(0); /* On les remove pour les enlever de la liste */
 		  bob.remove(0);
 		  
 	  }
 	  
-	  return bob.get(0);
+	  return bob.get(0); /* On retourne l'arbre */
   }
 
   /**
