@@ -93,17 +93,6 @@ public class CodageHuffman
 	  
 	  return bob;
   }
-  
-  
-  public static int minimum(List<Couple<Character, Integer>> arbre){
-	  
-	  int min;
-	  
-	  /* Je parcours ma liste de couples, je cherche le min */
-	  
-	  
-	  return 0;
-  }
 
   /**
    * 4. construire un arbre de codage de Huffman par sélection et combinaison
@@ -113,23 +102,51 @@ public class CodageHuffman
    */
   public static ABinHuffman construireArbreHuffman(int [] tableFrequences)
   {
-	  List<Couple<Character, Integer>> bob = new ArrayList<Couple<Character, Integer>>();
+	  List<ABinHuffman> bob = new ArrayList<ABinHuffman>();
 	  
 	  for(int i = 0; i < tableFrequences.length; i++){
 		  if(tableFrequences[i] != 0){
-			  bob.add(new Couple<Character, Integer>((char) i, tableFrequences[i]));
+			  ABinHuffman  elem = new ABinHuffman();
+			  elem.setValeur(new Couple<Character, Integer>((char) i, tableFrequences[i]));
+			  bob.add(elem);
 		  }
 	  }
-	  Collections.sort(bob ,new Comparator<Couple<Character, Integer>>() {
+	  Collections.sort(bob ,new Comparator<ABinHuffman>() {
+
 		@Override
-		public int compare(Couple<Character, Integer> arg0,
-				Couple<Character, Integer> arg1) {
-			return arg0.deuxieme().compareTo(arg1.deuxieme());
+		public int compare(ABinHuffman o1, ABinHuffman o2) {
+			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());
 		}
+
 		  
 	  });
 	  
-	  return null;
+	  while(bob.size() != 1){ /* Tant qu'il reste plus d'un caractère */
+		
+		  ABinHuffman tree = new ABinHuffman();
+		  int percent = bob.get(0).getValeur().deuxieme()+bob.get(1).getValeur().deuxieme();
+		  
+		  tree.setValeur(new Couple<Character, Integer>('b', percent));
+		  ABinHuffman left = new ABinHuffman();
+		  left.setValeur(bob.get(0).getValeur());
+		  tree.setGauche(left);
+		  
+		  ABinHuffman right = new ABinHuffman();
+		  right.setValeur(bob.get(1).getValeur());
+		  tree.setDroit(right);
+		  
+		  int index = 0;
+		  while (bob.get(index).getValeur().deuxieme() >= tree.getValeur().deuxieme()) {
+			  index++;
+		  }
+		  bob.add(index, tree);
+		  
+		  bob.remove(0);
+		  bob.remove(0);
+		  
+	  }
+	  
+	  return bob.get(0);
   }
 
   /**
@@ -141,6 +158,8 @@ public class CodageHuffman
    */
   private static ListeABH faireListeAbinHuffman(int [] tableFrequences)
   {
+	  
+	  
 	  return null;
   }
 
