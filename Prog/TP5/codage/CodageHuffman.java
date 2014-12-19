@@ -158,9 +158,18 @@ public class CodageHuffman
    */
   private static ListeABH faireListeAbinHuffman(int [] tableFrequences)
   {
+	  ListeABH listeTri = new ListeABH();
 	  
+	  Collections.sort(listeTri, new Comparator<ABinHuffman>() {
+
+		@Override
+		public int compare(ABinHuffman o1, ABinHuffman o2) {
+			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());
+		}
+		  
+	  });
 	  
-	  return null;
+	  return listeTri;
   }
 
   /**
