@@ -16,7 +16,7 @@ public class DecodageHuffman
 	//------------------------------------------------------------------------
 	// 0. Saisir le nom du fichier à décoder (À FAIRE)
 	//------------------------------------------------------------------------
-		String nomFichier = "/private/student/6/36/13004636/workspace/TP5/exemple.txt.code";
+		String nomFichier = "/private/student/6/36/13004636/workspace/TP5/poemes.txt.code";
 
 	//------------------------------------------------------------------------
 	// 1. Lire et construire la table de fréquences (DONNÉ)
@@ -125,13 +125,18 @@ public class DecodageHuffman
   
   private static void getHuffmanFeuille(ABinHuffman a, String encoding) {
 	// On v�rifie si cet arbre est une feuille
-		if (a.estFeuille()) {
-			System.out.print("<" + a.getValeur().premier() + "," + a.getValeur().deuxieme() + "> : ");
+		if (a.estFeuille()) { /* Si la valeur à laquelle on arrive est une feuille */
+			if (a.getValeur().premier()  == '\n') {
+				System.out.print("<\\n," + a.getValeur().deuxieme() + "> : ");
+			}
+			else {
+				System.out.print("<" + a.getValeur().premier() + "," + a.getValeur().deuxieme() + "> : ");
+			}
 			System.out.println(encoding);
 			return;
 		}
 
-		getHuffmanFeuille(a.filsGauche(), encoding + "0");
+		getHuffmanFeuille(a.filsGauche(), encoding + "0"); /* On retourne avec 0 si fils gauche, inverse si fils droit */
 		getHuffmanFeuille(a.filsDroit(), encoding + "1");
   }
 } // DecodageHuffman
