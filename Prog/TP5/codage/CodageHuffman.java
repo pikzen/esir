@@ -179,7 +179,12 @@ public class CodageHuffman
    */
   public static String [] construireTableCodage(ABinHuffman abinHuff)
   {
-	  return null;
+	  
+	  String[] tableauReturn = new String[256];
+	  
+	  
+	  
+	  return tableauReturn;
   }
 
   /**
