@@ -1,7 +1,13 @@
 package codage;
-import types.ABinHuffman;
-import types.ListeABH;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import outilsHuffman.OutilsHuffman;
+import types.ABinHuffman;
+import types.Couple;
+import types.ListeABH;
 
 /**
  * Réalisation du codage d'un texte par la méthode de Huffman
@@ -78,7 +84,14 @@ public class CodageHuffman
    */
   public static int [] calculerFrequences(char [] tcar)
   {
-	  return null;
+	  int[] bob = new int[256];
+	  
+	  /* Parcourir le tableau des caractères du texte, incrémenter quand caractère trouvé ! */
+	  for(int i = 0; i < tcar.length; i++){
+		  bob[tcar[i]]++;
+	  }
+	  
+	  return bob;
   }
 
   /**
@@ -89,7 +102,51 @@ public class CodageHuffman
    */
   public static ABinHuffman construireArbreHuffman(int [] tableFrequences)
   {
-	  return null;
+	  List<ABinHuffman> bob = new ArrayList<ABinHuffman>(); /* Liste à retourner */
+	  
+	  for(int i = 0; i < tableFrequences.length; i++){ /* Pour chaque élément du tableau tableFréquences */
+		  if(tableFrequences[i] != 0){ /* Si le code ASCII i est présent au moins une fois */
+			  ABinHuffman  elem = new ABinHuffman();
+			  elem.setValeur(new Couple<Character, Integer>((char) i, tableFrequences[i]));
+			  bob.add(elem);
+		  }
+	  }
+	  Collections.sort(bob ,new Comparator<ABinHuffman>() { /* Pour trier notre arbre bin */
+
+		@Override
+		public int compare(ABinHuffman o1, ABinHuffman o2) {
+			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());
+		}
+
+		  
+	  });
+	  
+	  while(bob.size() != 1){ /* Tant qu'il reste plus d'un caractère */
+		
+		  ABinHuffman tree = new ABinHuffman(); /* Notre arbre à ajouter dans bob */
+		  int percent = bob.get(0).getValeur().deuxieme()+bob.get(1).getValeur().deuxieme(); /* Pour la valeur du père */
+		  
+		  tree.setValeur(new Couple<Character, Integer>('b', percent));
+		  ABinHuffman left = new ABinHuffman(); /* Pour la valeur de gauche */
+		  left.setValeur(bob.get(0).getValeur());
+		  tree.setGauche(left);
+		  
+		  ABinHuffman right = new ABinHuffman(); /* Pour la valeur de droite */
+		  right.setValeur(bob.get(1).getValeur());
+		  tree.setDroit(right);
+		  
+		  int index = 0;
+		  while (bob.get(index).getValeur().deuxieme() >= tree.getValeur().deuxieme()) { /* Pour l'indexer au bon endroit */
+			  index++;
+		  }
+		  bob.add(index, tree); /* On ajoute l'arbre à bob */
+		  
+		  bob.remove(0); /* On les remove pour les enlever de la liste */
+		  bob.remove(0);
+		  
+	  }
+	  
+	  return bob.get(0); /* On retourne l'arbre */
   }
 
   /**
@@ -101,7 +158,18 @@ public class CodageHuffman
    */
   private static ListeABH faireListeAbinHuffman(int [] tableFrequences)
   {
-	  return null;
+	  ListeABH listeTri = new ListeABH();
+	  
+	  Collections.sort(listeTri, new Comparator<ABinHuffman>() {
+
+		@Override
+		public int compare(ABinHuffman o1, ABinHuffman o2) {
+			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());
+		}
+		  
+	  });
+	  
+	  return listeTri;
   }
 
   /**
@@ -111,7 +179,12 @@ public class CodageHuffman
    */
   public static String [] construireTableCodage(ABinHuffman abinHuff)
   {
-	  return null;
+	  
+	  String[] tableauReturn = new String[256];
+	  
+	  
+	  
+	  return tableauReturn;
   }
 
   /**

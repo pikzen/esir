@@ -16,7 +16,7 @@ public class DecodageHuffman
 	//------------------------------------------------------------------------
 	// 0. Saisir le nom du fichier à décoder (À FAIRE)
 	//------------------------------------------------------------------------
-		String nomFichier = "D:/Code/ESIR/Prog/TP5/exemple.txt.code";
+		String nomFichier = "/private/student/6/36/13004636/workspace/TP5/poemes.txt.code";
 
 	//------------------------------------------------------------------------
 	// 1. Lire et construire la table de fréquences (DONNÉ)
@@ -80,7 +80,7 @@ public class DecodageHuffman
 	while (!read) {
 		// On séléctionne les x caractères suivants, x augmentant tant qu'on a pas trouvé de caractère correspondant.
 		String sub = texteCode.substring(baseIdx, baseIdx + charSize);
-
+		
 		// Si il existe une clé y correspondant, on ajoute le caractère dans le message, et on passe aux sous-chaines suivantes
 		if (huffman.containsKey(sub)) {
 			sb.append(huffman.get(sub));
@@ -104,7 +104,7 @@ public class DecodageHuffman
   private static void readTree(ABinHuffman tree,
   							   String encoding,
   							   HashMap<String, Character> data) {
-	// On v�rifie si cet arbre est une feuille
+	// On v�rifie si cet arbre est une feuille
 	if (tree.estFeuille()) {
 		data.put(encoding, tree.getValeur().premier());
 		return;
@@ -120,5 +120,23 @@ public class DecodageHuffman
    */
   public static void afficherHuffman(ABinHuffman a)
   {
+	  getHuffmanFeuille(a, "");
+  }
+  
+  private static void getHuffmanFeuille(ABinHuffman a, String encoding) {
+	// On v�rifie si cet arbre est une feuille
+		if (a.estFeuille()) { /* Si la valeur à laquelle on arrive est une feuille */
+			if (a.getValeur().premier()  == '\n') {
+				System.out.print("<\\n," + a.getValeur().deuxieme() + "> : ");
+			}
+			else {
+				System.out.print("<" + a.getValeur().premier() + "," + a.getValeur().deuxieme() + "> : ");
+			}
+			System.out.println(encoding);
+			return;
+		}
+
+		getHuffmanFeuille(a.filsGauche(), encoding + "0"); /* On retourne avec 0 si fils gauche, inverse si fils droit */
+		getHuffmanFeuille(a.filsDroit(), encoding + "1");
   }
 } // DecodageHuffman
