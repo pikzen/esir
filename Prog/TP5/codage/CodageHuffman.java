@@ -127,18 +127,16 @@ public class CodageHuffman
 		  int percent = bob.get(0).getValeur().deuxieme()+bob.get(1).getValeur().deuxieme(); /* Pour la valeur du père */
 		  
 		  tree.setValeur(new Couple<Character, Integer>('b', percent));
-		  ABinHuffman left = new ABinHuffman(); /* Pour la valeur de gauche */
-		  left.setValeur(bob.get(0).getValeur());
-		  tree.setGauche(left);
-		  
-		  ABinHuffman right = new ABinHuffman(); /* Pour la valeur de droite */
-		  right.setValeur(bob.get(1).getValeur());
-		  tree.setDroit(right);
+		  tree.setGauche(bob.get(0));
+		  tree.setDroit(bob.get(1));
 		  
 		  int index = 0;
-		  while (bob.get(index).getValeur().deuxieme() >= tree.getValeur().deuxieme()) { /* Pour l'indexer au bon endroit */
+		  while (index < bob.size() && 
+				 bob.get(index).getValeur().deuxieme() <= tree.getValeur().deuxieme()) { /* Pour l'indexer au bon endroit */
 			  index++;
 		  }
+		  
+		
 		  bob.add(index, tree); /* On ajoute l'arbre à bob */
 		  
 		  bob.remove(0); /* On les remove pour les enlever de la liste */
@@ -164,7 +162,7 @@ public class CodageHuffman
 
 		@Override
 		public int compare(ABinHuffman o1, ABinHuffman o2) {
-			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());
+			return o1.getValeur().deuxieme().compareTo(o2.getValeur().deuxieme());	
 		}
 		  
 	  });
@@ -182,17 +180,29 @@ public class CodageHuffman
 	  
 	  String[] tableauReturn = new String[256];
 	  
-	  
+	  tableauHelp(abinHuff, tableauReturn, "");
 	  
 	  return tableauReturn;
   }
 
+  private static void tableauHelp(ABinHuffman Huffman, String[] tableau, String current){
+	  if(Huffman.estFeuille()){
+		 Character car = Huffman.getValeur().premier();
+		 tableau[(int)car] = current;
+		 return;
+	  }
+	  tableauHelp(Huffman.filsGauche(), tableau, current+"0");
+	  tableauHelp(Huffman.filsDroit(), tableau, current+"1");
+  }
   /**
    * 5.1. Afficher la table de codage associée au texte
    * @param tablecodage : table de codage associée au texte
    */
   public static void afficherTableCodage(String [] tablecodage)
   {
+	  for(int i = 0; i < 255; i++){
+		  if (tablecodage[i] != null) System.out.println("<" + (char)i + "," + tablecodage[i] + ">");
+	  }
   }
 
   /**
@@ -203,6 +213,12 @@ public class CodageHuffman
    */
   public static StringBuilder coderTexte(char [] texte, String [] tablecodage)
   {
-	  return null;
+	  StringBuilder sb = new StringBuilder();
+	  
+	  for(int i = 0; i < texte.length; i++) {
+		  sb.append(tablecodage[texte[i]]);
+	  }
+		  
+	  return sb;
   }
 }// CodageHuffman

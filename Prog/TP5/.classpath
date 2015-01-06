@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/private/student/6/36/13004636/Téléchargements/types.jar"/>
+	<classpathentry kind="lib" path="/private/student/6/36/13004636/workspace/Prog/TP5/outilsHuffman.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
