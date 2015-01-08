@@ -1,5 +1,7 @@
 package messagerie;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Un Opérateur gère des abonnés et des communications
@@ -7,6 +9,7 @@ import java.util.Date;
 public class Operateur
 {
 
+	List<Forfait> listeForfaits = new ArrayList<Forfait>();
   /**
    * Une personne souscrit un abonnement et reçoit un téléphone
    */

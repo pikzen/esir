@@ -8,6 +8,7 @@ import java.util.Date;
 public class Telephone implements GestionCommunication
 {
 
+	private BoiteSMS boiteSMS;
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------

@@ -7,6 +7,11 @@ import java.util.Date;
 public class AbonneOperateur implements GestionCommunication
 {
 
+	private BoiteSMS boiteS;
+	private BoiteVocale boiteV;
+	private Operateur operateur;
+	private NumeroTelephone numTel;
+	private Forfait forfait;
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------
