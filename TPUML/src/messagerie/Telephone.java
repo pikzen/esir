@@ -17,29 +17,27 @@ public class Telephone implements GestionCommunication
   @Override
   public boolean appeler(String numero, String msgVocalSiOccupe, Date dateDebut)
   {
-    // TODO
-    return false;
+		return abonneOp.appeler(numero, msgVocalSiOccupe, dateDebut);
   }
   @Override
   public void envoyerSMS(String numero, String sms, Date dateSMS)
   {
-    // TODO
+		abonneOp.envoyerSMS(numero, sms, dateSMS);
   }
   @Override
   public void recevoirSMS(MessageSMS message)
   {
-    // TODO
+		abonneOp.recevoirSMS(message);
   }
   @Override
   public boolean accepterAppel(String numeroAppelant)
   {
-    // TODO
-    return false;
+		abonneOp.accepterAppel(numeroAppelant);
   }
   @Override
   public void cloreAppel(Date fin)
   {
-    // TODO
+		abonneOp.cloreAppel(fin);
   }
 
   //------------------------------------------------------------------------
