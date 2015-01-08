@@ -10,13 +10,23 @@ public class Operateur
 {
 
 	List<Forfait> listeForfaits = new ArrayList<Forfait>();
+	List<Appel> listeAppels = new ArrayList<Appel>();
+	
   /**
    * Une personne souscrit un abonnement et reçoit un téléphone
    */
   public Telephone souscrire(String nomPersonne,
 			     String nomForfait)
   {
-    // TODO
+	  Forfait forf = new Forfait();
+	  for(Forfait f : listeForfaits){
+		  if(f.getNom() == nomForfait){
+			  forf = f;
+			  break;
+		  }
+	  }
+	  
+    AbonneOperateur	newAbo = new AbonneOperateur(nomPersonne, forf, );
     return null;
   }
 

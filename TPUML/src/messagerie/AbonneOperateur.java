@@ -12,6 +12,19 @@ public class AbonneOperateur implements GestionCommunication
 	private Operateur operateur;
 	private NumeroTelephone numTel;
 	private Forfait forfait;
+	private Telephone telephone;
+	private String nomAbonne;
+	
+	public AbonneOperateur(String nom, Telephone tel, Forfait forfait, NumeroTelephone numTel, Operateur op, BoiteVocale boitV, BoiteSMS boitS){
+		nomAbonne = nom;
+		telephone = tel;
+		this.forfait = forfait;
+		this.numTel = numTel;
+		operateur = op;
+		boiteV = boitV;
+		boiteS = boitS;
+	}
+	
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------

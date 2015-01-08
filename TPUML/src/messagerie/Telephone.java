@@ -9,6 +9,8 @@ public class Telephone implements GestionCommunication
 {
 
 	private BoiteSMS boiteSMS;
+	private AbonneOperateur abonneOp;
+	
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------
