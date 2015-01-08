@@ -18,7 +18,7 @@ public class Operateur
 		public Telephone souscrire(String nomPersonne,
 					     String nomForfait)
 		{
-			Forfait forf = new Forfait();
+			Forfait forf;
 			for(Forfait f : listeForfaits){
 				if(f.getNom() == nomForfait){
 					forf = f;
@@ -32,7 +32,7 @@ public class Operateur
 		public Operateur(String nomOp) {
 				this.nom = nomOp;
 				this.listeForfaits = new ArrayList<Forfait>();
-				this.listeAppels = = new ArrayList<Appel>();
+				this.listeAppels = new ArrayList<Appel>();
 		}
 
 		public boolean estAbonne(String numero) {
@@ -82,7 +82,7 @@ public class Operateur
 		
 				// Aucun opérateur ne connait ce numéro. La connection n'est pas établie
 				if (recepteur == null)
-						return false
+						return false;
 				else {
 						if (recepteur.estHorsLigne() || !recepteur.estLibre())
 								comm = new CommMessageVocal(emetteur, recepteur, msgVocal, dateAppel);
