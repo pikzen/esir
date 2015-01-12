@@ -11,7 +11,9 @@ public class Operateur
 		private String nom;
 		List<Forfait> listeForfaits;
 		List<Appel> listeAppels;
-	
+		List<AbonneOperateur> listeAbonnes;
+		List<Operateur> listeOperateurs;
+		List<AbstractCommunication> historique;
 		/**
 		 * Une personne souscrit un abonnement et reçoit un téléphone
 		 */
@@ -31,8 +33,10 @@ public class Operateur
 		}
 		public Operateur(String nomOp) {
 				this.nom = nomOp;
-				this.listeForfaits = new ArrayList<Forfait>();
-				this.listeAppels = = new ArrayList<Appel>();
+				this.listeForfaits 		= new ArrayList<Forfait>();
+				this.listeAppels 		= new ArrayList<Appel>();
+				this.listeAbonnes 		= new ArrayList<AbonneOperateur>();
+				this.listeOperateurs 	= new ArrayList<Operateur>();
 		}
 
 		public boolean estAbonne(String numero) {
@@ -43,10 +47,25 @@ public class Operateur
 		}
 
 		public AbonneOperateur getAbonne(String numero) {
-				for (AbonneOperateur ab : listeAbonnes)
-						if (ab.getTelephoneNumber().equals(numero)) return ab;
+				AbonneOperateur abonne = null;
+				for (AbonneOperateur ab : listeAbonnes) {
+						if (ab.getTelephoneNumber().equals(numero)) {
+								abonne = ab;
+								break;
+						}
+				}
 
-				return null;
+				// Aucun abonné avec ce numéro. On demande aux autres opérateurs si ils ont ce numéro
+				if (abonne == null) {
+						for (Operateur op : listeOperateurs) {
+								if (op.estAbonne(numeroDestinataire)) {
+										abonne = op.getAbonne(numeroDestinataire);
+										break;
+								}
+						}
+				}
+
+				return abonne;
 		}
 
 		/**
@@ -62,39 +81,25 @@ public class Operateur
 				// On ne sait pas encore quel type de communication on va initier (appel ou message vocal)
 				AbstractCommunication comm = null;
 				// On a besoin de vérifier si le numéro existe bien.
-				AbonneOperateur recepteur = null;
-				for (AbonneOperateur ab : listeAbonnes) {
-						if (ab.getTelephoneNumber().equals(numeroDestinataire)) {
-								recepteur = ab;
-								break;
-						}
-				}
-
-				// Aucun abonné avec ce numéro. On demande aux autres opérateurs si ils ont ce numéro
-				if (recepteur == null) {
-						for (Operateur op : listeOperateurs) {
-								if (op.estAbonne(numeroDestinataire)) {
-										recepteur = op.getAbonne(numeroDestinataire);
-										break;
-								}
-						}
-				}
+				AbonneOperateur recepteur = getAbonne(numeroDestinataire);
 		
 				// Aucun opérateur ne connait ce numéro. La connection n'est pas établie
 				if (recepteur == null)
 						return false
 				else {
-						if (recepteur.estHorsLigne() || !recepteur.estLibre())
-								comm = new CommMessageVocal(emetteur, recepteur, msgVocal, dateAppel);
-						else if (recepteur.estLibre()) {
-								comm = new Appel(emetteur, recepteur, date);
-								// On doit encore vérifier si le recepteur accepte l'appel. Si non, on considere
-								// que la communication n'a pas été établie.
-								if (!recepteur.accepterAppel(emetteur.getTelephoneNumber()) {
-										return false;
-								}
+						if (recepteur.estHorsLigne() || !recepteur.estLibre()) {
+							comm = new CommMessageVocal(emetteur, recepteur, msgVocal, dateAppel);
 
-								this.appelsEnCours.add(comm);
+						}
+						else if (recepteur.estLibre()) {
+							comm = new Appel(emetteur, recepteur, date);
+							// On doit encore vérifier si le recepteur accepte l'appel. Si non, on considere
+							// que la communication n'a pas été établie.
+							if (!recepteur.accepterAppel(emetteur.getTelephoneNumber()) {
+									return false;
+							}
+
+							this.listeAppels.add(comm);
 						}
 						else
 								return false;
@@ -113,13 +118,13 @@ public class Operateur
 		 * @param sms : le texte du SMS
 		 * @pamra dateEnvoi
 		 */
-		public void
-				posterSMS(AbonneOperateur emetteur,
-								String numeroDestinataire,
-								String sms,
-								Date dateEnvoi)
+		public void	posterSMS(AbonneOperateur emetteur,	String numeroDestinataire, String sms, Date dateEnvoi)
 		{
-				// TODO
+			AbonneOperateur recepteur = getAbonne(numeroDestinataire);
+			if (recepteur == null) return;
+			MessageSMS mess = new MessageSMS(emetteur, recepteur, sms, dateEnvoi);
+			this.historique.add(mess)
+			recepteur.recevoirSMS(mess);
 		}
 
 		/**
@@ -129,7 +134,15 @@ public class Operateur
 		 */
 		public void cloreAppel(AbonneOperateur abonne, Date fin)
 		{
-				// TODO
+			Appel ap;
+			for (Appel appel : listeAppels) {
+				if (appel.getAppelant().equals(abonne.getTelephoneNumber())) {
+					ap = appel;
+					break;
+				}
+			}
+			this.historique.add(ap);
+			this.listeAppels.remove(ap);
 		}
 
 } // Operateur
