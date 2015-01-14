@@ -12,6 +12,9 @@ public class Telephone implements GestionCommunication
 	private AbonneOperateur abonneOp;
 	public boolean allume = false;
 	
+	public Telephone(BoiteSMS boiteS){
+		boiteSMS = boiteS;
+	}
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------
@@ -52,6 +55,10 @@ public class Telephone implements GestionCommunication
   }
   public void eteindre() {
     allume = false;
+  }
+  
+  public void setAbonne(AbonneOperateur abo){
+	  abonneOp = abo;
   }
 
 } // Telephone

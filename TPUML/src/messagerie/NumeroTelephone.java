@@ -8,4 +8,12 @@ public class NumeroTelephone {
 		public String getNumero() {
 			return this.numero;
 		}
+		
+		public Operateur getOperateur(){
+			return this.operateur;
+		}
+		
+		public void setAbonne(AbonneOperateur ab){
+			abonne = ab;
+		}
 }

@@ -12,7 +12,7 @@ public class AbonneOperateur implements GestionCommunication
 	private Operateur operateur;
 	private NumeroTelephone numTel;
 	private Forfait forfait;
-	private Telephone telephone;
+	public Telephone telephone;
 	private String nomAbonne;
 	
 	public AbonneOperateur(String nom, Telephone tel, Forfait forfait, NumeroTelephone numTel, Operateur op, BoiteVocale boitV, BoiteSMS boitS){
@@ -25,10 +25,7 @@ public class AbonneOperateur implements GestionCommunication
 		boiteS = boitS;
 	}
 
-  public getTelephoneNumber() {
-    return this.numTel.getNumero();
-  }
-	
+ 
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
   //------------------------------------------------------------------------
@@ -62,7 +59,7 @@ public class AbonneOperateur implements GestionCommunication
     	return false;
     }
     
-    if(this.estLibre()){
+    if(this.estLibre() && telephone.accepterAppel(numeroAppelant)){
     	return true;
     }
     
@@ -101,5 +98,9 @@ public class AbonneOperateur implements GestionCommunication
     }
     return false;
  }
+  
+  public NumeroTelephone getTelephoneNumber(){
+	  return numTel;
+  }
 
 } // AbonneOperateur

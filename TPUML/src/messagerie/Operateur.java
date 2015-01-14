@@ -12,26 +12,45 @@ public class Operateur
 		List<Forfait> listeForfaits;
 
 		List<Appel> listeAppels;
+		List<NumeroTelephone> listNumeros;
 		List<AbonneOperateur> listeAbonnes;
 		List<Operateur> listeOperateurs;
 		List<AbstractCommunication> historique;
 
 		/**
 		 * Une personne souscrit un abonnement et reçoit un téléphone
+		 * @throws Exception 
 		 */
 		public Telephone souscrire(String nomPersonne,
 					     String nomForfait)
 		{
-			Forfait forf;
+			Forfait forf = null;
 			for(Forfait f : listeForfaits){
 				if(f.getNom() == nomForfait){
 					forf = f;
 					break;
 				}
 			}
-			  
-		    AbonneOperateur	newAbo = new AbonneOperateur(nomPersonne, forf, );
-		    return null;
+			
+			Telephone telephone = null;
+			NumeroTelephone tel = null;
+			for(NumeroTelephone t : listNumeros){
+				if(t.getNumero() != tel.getNumero()){
+					tel = t;
+					break;
+				}
+			}
+			
+			if(tel == null){
+				return null;
+			}
+			
+			BoiteVocale bv = new BoiteVocale(tel);
+			BoiteSMS bs = new BoiteSMS(tel);
+			telephone = new Telephone(bs);
+		    AbonneOperateur	newAbo = new AbonneOperateur(nomPersonne, telephone, forf, tel, tel.getOperateur(), bv, bs);
+		    telephone.setAbonne(newAbo);
+		    return telephone;
 		}
 		public Operateur(String nomOp) {
 				this.nom = nomOp;
@@ -60,8 +79,8 @@ public class Operateur
 				// Aucun abonné avec ce numéro. On demande aux autres opérateurs si ils ont ce numéro
 				if (abonne == null) {
 						for (Operateur op : listeOperateurs) {
-								if (op.estAbonne(numeroDestinataire)) {
-										abonne = op.getAbonne(numeroDestinataire);
+								if (op.estAbonne(numero)) {
+										abonne = op.getAbonne(numero);
 										break;
 								}
 						}
@@ -94,14 +113,14 @@ public class Operateur
 
 						}
 						else if (recepteur.estLibre()) {
-							comm = new Appel(emetteur, recepteur, date);
+							comm = new Appel(emetteur, recepteur, dateAppel);
 							// On doit encore vérifier si le recepteur accepte l'appel. Si non, on considere
 							// que la communication n'a pas été établie.
-							if (!recepteur.accepterAppel(emetteur.getTelephoneNumber()) {
+							if (!recepteur.accepterAppel(emetteur.getTelephoneNumber().getNumero())) {
 									return false;
 							}
 
-							this.listeAppels.add(comm);
+							this.listeAppels.add((Appel)comm);
 						}
 						else
 								return false;
@@ -126,8 +145,8 @@ public class Operateur
 			AbonneOperateur recepteur = getAbonne(numeroDestinataire);
 			if (recepteur == null) return;
 			
-			MessageSMS mess = new MessageSMS(emetteur, recepteur, sms, dateEnvoi);
-			this.historique.add(mess)
+			MessageSMS mess = new MessageSMS(emetteur, recepteur, dateEnvoi, sms);
+			this.historique.add(new CommSMS(recepteur, emetteur));
 			recepteur.recevoirSMS(mess);
 
 		}
@@ -140,7 +159,7 @@ public class Operateur
 		public void cloreAppel(AbonneOperateur abonne, Date fin)
 		{
 
-			Appel ap;
+			Appel ap = null;;
 			for (Appel appel : listeAppels) {
 				if (appel.getAppelant().equals(abonne.getTelephoneNumber())) {
 					ap = appel;
