@@ -21,4 +21,6 @@ public class Forfait {
 	public String getNom(){
 		return nom;
 	}
+	
+	
 }

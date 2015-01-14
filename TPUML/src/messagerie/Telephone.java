@@ -10,6 +10,7 @@ public class Telephone implements GestionCommunication
 
 	private BoiteSMS boiteSMS;
 	private AbonneOperateur abonneOp;
+	public boolean allume = false;
 	
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
@@ -32,7 +33,8 @@ public class Telephone implements GestionCommunication
   @Override
   public boolean accepterAppel(String numeroAppelant)
   {
-		abonneOp.accepterAppel(numeroAppelant);
+		boolean result = abonneOp.accepterAppel(numeroAppelant);
+		return result;
   }
   @Override
   public void cloreAppel(Date fin)
@@ -45,10 +47,11 @@ public class Telephone implements GestionCommunication
   //------------------------------------------------------------------------
 
   public void allumer() {
-    // TODO
+	abonneOp.synchroniser();
+    allume = true;
   }
   public void eteindre() {
-    // TODO
+    allume = false;
   }
 
 } // Telephone

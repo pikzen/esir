@@ -32,29 +32,39 @@ public class AbonneOperateur implements GestionCommunication
   @Override
   public boolean appeler(String numero, String msgVocalSiOccupe, Date dateDebut)
   {
-    // TODO
+    operateur.etablirCommunication(this, numero, msgVocalSiOccupe, dateDebut);
     return false;
   }
   @Override
   public void envoyerSMS(String numero, String sms, Date dateSMS)
   {
-    // TODO
+    operateur.posterSMS(this, numero, sms, dateSMS);
   }
   @Override
   public void recevoirSMS(MessageSMS message)
   {
-    // TODO
+    if(telephone.allume == true){
+    	telephone.recevoirSMS(message);
+    }
   }
+  
   @Override
   public boolean accepterAppel(String numeroAppelant)
   {
-    // TODO
-    return false;
+    if(this.estHorsLigne()){
+    	return false;
+    }
+    
+    if(this.estLibre()){
+    	return true;
+    }
+    
+    return true;
   }
   @Override
   public void cloreAppel(Date fin)
   {
-    // TODO
+    operateur.cloreAppel(this, fin);
   }
 
   //------------------------------------------------------------------------
@@ -64,19 +74,25 @@ public class AbonneOperateur implements GestionCommunication
   // transférer sur le téléphone les SMS du serveur
   public void synchroniser()
   {
-    // TODO
+    if(telephone.allume == true){
+    	
+    }
   }
 
   boolean estHorsLigne()
   {
-    // TODO
-    return true;
+	if(telephone.allume == false){
+		return true;
+	}
+	return false;
   }
 
   boolean estLibre()
   {
-    // TODO
-    return true;
-  }
+    if(telephone.allume == true){
+    	return true;
+    }
+    return false;
+ }
 
 } // AbonneOperateur

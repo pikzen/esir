@@ -10,8 +10,9 @@ public class Operateur
 {
 		private String nom;
 		List<Forfait> listeForfaits;
-		List<Appel> listeAppels;
-	
+		List<Appel> appelEnCours;
+		
+		
 		/**
 		 * Une personne souscrit un abonnement et reçoit un téléphone
 		 */
@@ -119,7 +120,11 @@ public class Operateur
 								String sms,
 								Date dateEnvoi)
 		{
-				// TODO
+				 AbonneOperateur dest = getAbonne(numeroDestinataire);
+				 if(dest == null){
+					 return;
+				 }
+				 dest.recevoirSMS(new MessageSMS(emetteur, dest, dateEnvoi, sms));
 		}
 
 		/**
@@ -129,7 +134,7 @@ public class Operateur
 		 */
 		public void cloreAppel(AbonneOperateur abonne, Date fin)
 		{
-				// TODO
+			
 		}
 
 } // Operateur
