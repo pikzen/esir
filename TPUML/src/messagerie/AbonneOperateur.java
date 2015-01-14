@@ -24,6 +24,10 @@ public class AbonneOperateur implements GestionCommunication
 		boiteV = boitV;
 		boiteS = boitS;
 	}
+
+  public getTelephoneNumber() {
+    return this.numTel.getNumero();
+  }
 	
   //------------------------------------------------------------------------
   // méthodes de l'interface GestionCommunication
@@ -32,13 +36,16 @@ public class AbonneOperateur implements GestionCommunication
   @Override
   public boolean appeler(String numero, String msgVocalSiOccupe, Date dateDebut)
   {
-    operateur.etablirCommunication(this, numero, msgVocalSiOccupe, dateDebut);
-    return false;
+
+    return this.operateur.etablirCommunication(this, numero, msgVocalSiOccupe, dateDebut);
+
   }
   @Override
   public void envoyerSMS(String numero, String sms, Date dateSMS)
   {
-    operateur.posterSMS(this, numero, sms, dateSMS);
+
+    this.operateur.posterSMS(this, numero, sms, dateSMS);
+
   }
   @Override
   public void recevoirSMS(MessageSMS message)
