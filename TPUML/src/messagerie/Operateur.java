@@ -122,6 +122,7 @@ public class Operateur
 		{
 			AbonneOperateur recepteur = getAbonne(numeroDestinataire);
 			if (recepteur == null) return;
+			
 			MessageSMS mess = new MessageSMS(emetteur, recepteur, sms, dateEnvoi);
 			this.historique.add(mess)
 			recepteur.recevoirSMS(mess);
