@@ -42,14 +42,12 @@ public class AbonneOperateur implements GestionCommunication
   {
 
     this.operateur.posterSMS(this, numero, sms, dateSMS);
-    System.out.println("envoyerSMS dans abonne operateur");
 
   }
   @Override
   public void recevoirSMS(MessageSMS message)
   {
 	  this.boiteS.ajouter(message);
-	  System.out.println("recevoir SMS dans abonne operateur");
   }
   
   @Override

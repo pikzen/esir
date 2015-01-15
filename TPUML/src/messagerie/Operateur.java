@@ -63,6 +63,7 @@ public class Operateur
 				this.listeOperateurs 	= new ArrayList<Operateur>();
 				this.listNumerosLibres  = new ArrayList<NumeroTelephone>();
 				this.listNumeros        = new ArrayList<NumeroTelephone>();
+				this.historique         = new ArrayList<AbstractCommunication>();
 				listNumeros.add(new NumeroTelephone("2"));
 				listNumeros.add(new NumeroTelephone("+33(0)700000004"));
 				listNumeros.add(new NumeroTelephone("3"));
@@ -88,9 +89,8 @@ public class Operateur
 		public AbonneOperateur getAbonne(String numero) {
 				AbonneOperateur abonne = null;
 				for (AbonneOperateur ab : listeAbonnes) {
-						if (ab.getTelephoneNumber().equals(numero)) {
+						if (ab.getTelephoneNumber().getNumero().equals(numero)) {
 								abonne = ab;
-								System.out.println("on passe dans getAbonne 1");
 								break;
 						}
 				}
@@ -100,7 +100,6 @@ public class Operateur
 						for (Operateur op : listeOperateurs) {
 								if (op.estAbonne(numero)) {
 										abonne = op.getAbonne(numero);
-										System.out.println("on passe dans getAbonne 2");
 										break;
 								}
 						}
@@ -164,14 +163,12 @@ public class Operateur
 
 			AbonneOperateur recepteur = getAbonne(numeroDestinataire);
 			if (recepteur == null) {
-				System.out.println("on a mardé quoi");
 				return;
 			}
 			
 			MessageSMS mess = new MessageSMS(emetteur, recepteur, dateEnvoi, sms);
-			this.historique.add(new CommSMS(recepteur, emetteur));
+			this.historique.add(new CommSMS(emetteur, recepteur));
 			recepteur.recevoirSMS(mess);
-
 		}
 
 		/**
@@ -192,6 +189,11 @@ public class Operateur
 			this.historique.add(ap);
 			this.listeAppels.remove(ap);
 
+		}
+		
+		@Override
+		public String toString(){
+			return "L'opérateur : "+this.nom+" possède : "+listeAbonnes.size()+" abonné(s)";
 		}
 
 } // Operateur

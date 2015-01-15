@@ -36,8 +36,7 @@ public class Telephone implements GestionCommunication
   @Override
   public boolean accepterAppel(String numeroAppelant)
   {
-		boolean result = abonneOp.accepterAppel(numeroAppelant);
-		return result;
+		return true;
   }
   @Override
   public void cloreAppel(Date fin)
