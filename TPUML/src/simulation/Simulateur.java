@@ -41,6 +41,7 @@ public class Simulateur
 	lesTelephones.put(noms[i], newtel);
       }
       catch (Exception e) {
+    	  e.printStackTrace();
 	System.err.println("*** Erreur : impossible d'abonner " + noms[i]);
       }
     }

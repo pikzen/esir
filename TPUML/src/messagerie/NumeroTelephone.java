@@ -4,6 +4,11 @@ public class NumeroTelephone {
 		private Operateur operateur;
 		private AbonneOperateur abonne;
 		private String numero;
+		
+		
+		public NumeroTelephone(String num){
+			numero = num;
+		}
 
 		public String getNumero() {
 			return this.numero;
@@ -16,4 +21,6 @@ public class NumeroTelephone {
 		public void setAbonne(AbonneOperateur ab){
 			abonne = ab;
 		}
+		
+		
 }

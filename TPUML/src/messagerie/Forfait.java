@@ -21,6 +21,15 @@ public class Forfait {
 	public String getNom(){
 		return nom;
 	}
+
+	public int getPrixInitial() {
+		return prixInitial;
+	}
+
+	public float getPrixSMS() {
+		return prixSMS;
+	}
+
 	
 	
 }

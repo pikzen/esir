@@ -13,6 +13,7 @@ public class Operateur
 
 		List<Appel> listeAppels;
 		List<NumeroTelephone> listNumeros;
+		List<NumeroTelephone> listNumerosLibres;
 		List<AbonneOperateur> listeAbonnes;
 		List<Operateur> listeOperateurs;
 		List<AbstractCommunication> historique;
@@ -33,13 +34,14 @@ public class Operateur
 			}
 			
 			Telephone telephone = null;
+			
 			NumeroTelephone tel = null;
-			for(NumeroTelephone t : listNumeros){
-				if(t.getNumero() != tel.getNumero()){
-					tel = t;
-					break;
-				}
+			
+			if(listNumerosLibres.size() == 0){
+				return null;
 			}
+			tel = listNumerosLibres.get(0);
+			listNumerosLibres.remove(0);
 			
 			if(tel == null){
 				return null;
@@ -58,6 +60,12 @@ public class Operateur
 				this.listeAppels 		= new ArrayList<Appel>();
 				this.listeAbonnes 		= new ArrayList<AbonneOperateur>();
 				this.listeOperateurs 	= new ArrayList<Operateur>();
+				this.listNumerosLibres  = new ArrayList<NumeroTelephone>();
+				this.listNumeros        = new ArrayList<NumeroTelephone>();
+				listNumeros.add(new NumeroTelephone("+33(0)700000004"));
+				for(NumeroTelephone n : listNumeros){
+					listNumerosLibres.add(n);
+				}
 		}
 
 		public boolean estAbonne(String numero) {
@@ -159,7 +167,7 @@ public class Operateur
 		public void cloreAppel(AbonneOperateur abonne, Date fin)
 		{
 
-			Appel ap = null;;
+			Appel ap = null;
 			for (Appel appel : listeAppels) {
 				if (appel.getAppelant().equals(abonne.getTelephoneNumber())) {
 					ap = appel;
