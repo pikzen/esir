@@ -50,8 +50,9 @@ public class Operateur
 			BoiteVocale bv = new BoiteVocale(tel);
 			BoiteSMS bs = new BoiteSMS(tel);
 			telephone = new Telephone(bs);
-		    AbonneOperateur	newAbo = new AbonneOperateur(nomPersonne, telephone, forf, tel, tel.getOperateur(), bv, bs);
+		    AbonneOperateur	newAbo = new AbonneOperateur(nomPersonne, telephone, forf, tel, this, bv, bs);
 		    telephone.setAbonne(newAbo);
+		    listeAbonnes.add(newAbo);
 		    return telephone;
 		}
 		public Operateur(String nomOp) {
@@ -62,10 +63,19 @@ public class Operateur
 				this.listeOperateurs 	= new ArrayList<Operateur>();
 				this.listNumerosLibres  = new ArrayList<NumeroTelephone>();
 				this.listNumeros        = new ArrayList<NumeroTelephone>();
+				listNumeros.add(new NumeroTelephone("2"));
 				listNumeros.add(new NumeroTelephone("+33(0)700000004"));
+				listNumeros.add(new NumeroTelephone("3"));
+				listNumeros.add(new NumeroTelephone("4"));
+				listNumeros.add(new NumeroTelephone("5"));
+				listNumeros.add(new NumeroTelephone("6"));
+				listNumeros.add(new NumeroTelephone("7"));
+				listNumeros.add(new NumeroTelephone("8"));
+				listNumeros.add(new NumeroTelephone("9"));
 				for(NumeroTelephone n : listNumeros){
 					listNumerosLibres.add(n);
 				}
+				
 		}
 
 		public boolean estAbonne(String numero) {
@@ -80,6 +90,7 @@ public class Operateur
 				for (AbonneOperateur ab : listeAbonnes) {
 						if (ab.getTelephoneNumber().equals(numero)) {
 								abonne = ab;
+								System.out.println("on passe dans getAbonne 1");
 								break;
 						}
 				}
@@ -89,6 +100,7 @@ public class Operateur
 						for (Operateur op : listeOperateurs) {
 								if (op.estAbonne(numero)) {
 										abonne = op.getAbonne(numero);
+										System.out.println("on passe dans getAbonne 2");
 										break;
 								}
 						}
@@ -151,7 +163,10 @@ public class Operateur
 		{
 
 			AbonneOperateur recepteur = getAbonne(numeroDestinataire);
-			if (recepteur == null) return;
+			if (recepteur == null) {
+				System.out.println("on a mardé quoi");
+				return;
+			}
 			
 			MessageSMS mess = new MessageSMS(emetteur, recepteur, dateEnvoi, sms);
 			this.historique.add(new CommSMS(recepteur, emetteur));

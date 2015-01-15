@@ -42,14 +42,14 @@ public class AbonneOperateur implements GestionCommunication
   {
 
     this.operateur.posterSMS(this, numero, sms, dateSMS);
+    System.out.println("envoyerSMS dans abonne operateur");
 
   }
   @Override
   public void recevoirSMS(MessageSMS message)
   {
-    if(telephone.allume == true){
-    	telephone.recevoirSMS(message);
-    }
+	  this.boiteS.ajouter(message);
+	  System.out.println("recevoir SMS dans abonne operateur");
   }
   
   @Override
@@ -78,9 +78,9 @@ public class AbonneOperateur implements GestionCommunication
   // transférer sur le téléphone les SMS du serveur
   public void synchroniser()
   {
-    if(telephone.allume == true){
-    	
-    }
+	  if(telephone.allume == true){
+		  boiteS.getMessages();
+	  }
   }
 
   boolean estHorsLigne()
@@ -101,6 +101,10 @@ public class AbonneOperateur implements GestionCommunication
   
   public NumeroTelephone getTelephoneNumber(){
 	  return numTel;
+  }
+  
+  public String getNom(){
+	  return nomAbonne;
   }
 
 } // AbonneOperateur

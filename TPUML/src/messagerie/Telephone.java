@@ -60,5 +60,10 @@ public class Telephone implements GestionCommunication
   public void setAbonne(AbonneOperateur abo){
 	  abonneOp = abo;
   }
+  
+  @Override
+  public String toString(){
+	  return "Le téléphone appartient à : "+abonneOp.getNom()+" le numéro est : "+abonneOp.getTelephoneNumber().getNumero()+" et il est actuellement : "+(allume?" allume " : "éteint")+" elle possède : "+boiteSMS.getNbSMS()+" message(s)";
+  }
 
 } // Telephone

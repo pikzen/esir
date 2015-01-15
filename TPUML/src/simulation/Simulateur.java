@@ -51,13 +51,13 @@ public class Simulateur
     //			À COMPLÉTER
     // ------------------------------------------------------------------------
     lesTelephones.get("Samuel").allumer();
-    lesTelephones.get("Samuel").appeler("+33(0)700000004", "Où c'est qu't'es ?", new Date(2012, 12, 13, 15, 45, 10));
-    lesTelephones.get("Samuel").envoyerSMS("+33(0)700000004", "Léa, réponds, nom d'une pipe !", new Date(2012, 12, 13, 15, 45, 10));
-    lesTelephones.get("Samuel").envoyerSMS("+33(0)700000004", "Léa, alleeez, sois pas vache !", new Date(2012, 12, 13, 15, 46, 0));
-    lesTelephones.get("Samuel").envoyerSMS("+33(0)700000004", "Léa, je plaisantais !!!!!!!!!!", new Date(2012, 12, 13, 15, 46, 10));
+    lesTelephones.get("Samuel").appeler("4", "Où c'est qu't'es ?", new Date(2012, 12, 13, 15, 45, 10));
+    lesTelephones.get("Samuel").envoyerSMS("4", "Léa, réponds, nom d'une pipe !", new Date(2012, 12, 13, 15, 45, 10));
+    lesTelephones.get("Samuel").envoyerSMS("4", "Léa, alleeez, sois pas vache !", new Date(2012, 12, 13, 15, 46, 0));
+    lesTelephones.get("Samuel").envoyerSMS("4", "Léa, je plaisantais !!!!!!!!!!", new Date(2012, 12, 13, 15, 46, 10));
     lesTelephones.get("Léa").allumer();
     System.out.println("\nÉtat de Léa: " + lesTelephones.get("Léa"));
-    lesTelephones.get("Samuel").appeler("+33(0)700000004", "Où c'est qu't'es ?", new Date(2012, 12, 13, 15, 47, 5));
+    lesTelephones.get("Samuel").appeler("4", "Où c'est qu't'es ?", new Date(2012, 12, 13, 15, 47, 5));
     afficher("État 1", breizhtel);
 
     // ------------------------------------------------------------------------
